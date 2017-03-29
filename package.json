@@ -1,0 +1,24 @@
+{
+  "name": "sb223fz-project",
+  "version": "1.0.0",
+  "description": "Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1dv430/sb223fz-project.git"
+  },
+  "author": "sofiabjorkesjo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1dv430/sb223fz-project/issues"
+  },
+  "homepage": "https://github.com/1dv430/sb223fz-project#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.2"
+  }
+}
