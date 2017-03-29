@@ -2,7 +2,7 @@
 
 let router = require('express').Router();
 
-router.route('/'))
+router.route('/')
     .get(function (req, res) {
         res.render(('home/index'));
 });
