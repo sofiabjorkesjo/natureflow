@@ -3,10 +3,15 @@
 let router = require('express').Router();
 let User = require('../models/User');
 
+//hämtar startsidan
+
 router.route('/')
     .get(function (req, res) {
         res.render(('basic/index'));
 });
+
+//hämtar sidan för att sign up
+//skapar en ny user, kollar om den finns, annars sparar den.
 
 router.route('/sign-up')
     .get(function (req, res) {
@@ -36,7 +41,7 @@ router.route('/sign-up')
                     }
             });
 
-    });
+        });
 
 
 
