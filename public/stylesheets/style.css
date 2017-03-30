@@ -5,17 +5,22 @@
 }
 
 body{
-    background-color: aquamarine;
+    background-color: white;
 }
 
 #header {
-    max-width: 1100px;
-    background-color: red;
+    width: auto;
+    height: 50px;
+    background-color: rgba(211, 211, 230, 0.19);
     margin: auto;
+    padding-top: 25px;
+    padding-left: 5px;
+    font-family: Helvetica;
+    font-weight: 100;
 }
 
-#login {
-    background-color: pink;
-    width: 400px;
 
-}
+
+
+
+
