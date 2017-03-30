@@ -1,0 +1,15 @@
+#wrapper {
+    max-width: 1100px;
+    background-color: aqua;
+    margin: auto;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+#header {
+    max-width: 1100px;
+    background-color: red;
+    margin: auto;
+}

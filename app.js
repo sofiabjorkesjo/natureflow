@@ -5,6 +5,7 @@ let exphbs = require('express-handlebars');
 let session = require('express-session');
 let mongoose = require('./config/db');
 let bodyParser = require('body-parser');
+let path = require('path');
 
 let app = express();
 
@@ -23,6 +24,8 @@ app.engine('.hbs', exphbs({
 app.set('view engine', 'hbs');
 
 app.use('/', require('./routes/home'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, function () {
     console.log('Express started on http://localhost' + port);
