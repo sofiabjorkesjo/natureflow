@@ -13,3 +13,9 @@ body{
     background-color: red;
     margin: auto;
 }
+
+#login {
+    background-color: pink;
+    width: 400px;
+
+}
