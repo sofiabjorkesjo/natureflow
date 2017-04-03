@@ -89,17 +89,37 @@ router.route('/logged-out')
 
 router.route('/images')
     .get(function (req, res) {
-        res.render('basic/images');
+        if(req.session.user) {
+            res.render('basic/images');
+        } else {
+            res.redirect('/403');
+        }
+
     });
 
 router.route('/profile')
     .get(function (req, res) {
-        res.render('basic/profile');
+        if (req.session.user) {
+            res.render('basic/profile');
+        } else {
+            res.redirect('/403');
+        }
+
     });
 
 router.route('/upload')
     .get(function (req, res) {
-        res.render('basic/upload');
+        if (req.session.user) {
+            res.render('basic/upload');
+        } else {
+            res.redirect('/403');
+        }
+
+    });
+
+router.route('/403')
+    .get(function (req, res) {
+        res.render('error/403');
     });
 
 module.exports = router;
