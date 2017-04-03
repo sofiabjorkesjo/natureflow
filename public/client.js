@@ -2,13 +2,13 @@
 
 let img = document.createElement('img');
 img.setAttribute('class', 'imgSlide');
-img.setAttribute('src', '/test/1.jpg');
+img.setAttribute('src', '/slideshow/1.jpg');
 let img2 = document.createElement('img');
 img2.setAttribute('class', 'imgSlide');
-img2.setAttribute('src', '/test/2.jpg');
+img2.setAttribute('src', '/slideshow/2.jpg');
 let img3 = document.createElement('img');
 img3.setAttribute('class', 'imgSlide');
-img3.setAttribute('src', '/test/3.jpg');
+img3.setAttribute('src', '/slideshow/3.jpg');
 
 let buttonLeft = document.createElement('button');
 buttonLeft.setAttribute('class', 'buttonLeft');
