@@ -1,6 +1,6 @@
 #wrapper {
     max-width: 1100px;
-    background-color: rgba(211, 211, 230, 0.19);
+    background-color: white;
     margin: auto;
     padding-left: 300px;
 
@@ -44,9 +44,9 @@ body{
 #footer{
     width: auto;
     background-color: rgba(211, 211, 230, 0.19);
-    height: 50px;
+    height: 40px;
+    padding-top: 5px;
     margin-top: 20px;
-    padding-top: 20px;
 }
 
 #footer p {
