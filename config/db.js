@@ -1,11 +1,11 @@
 'use strict';
 
 let mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 //connectar till databasen
 
 module.exports = function () {
-    mongoose.Promise = global.Promise;
     let link = 'mongodb://sofiasuser:sofia@ds145380.mlab.com:45380/sofiasdatabas';
     let db = mongoose.connect(link);
 

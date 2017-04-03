@@ -11,6 +11,7 @@ let bodyParser = require('body-parser');
 //kan använda sökvägar
 let path = require('path');
 
+
 let app = express();
 
 app.use(bodyParser.json());
@@ -28,6 +29,17 @@ app.engine('.hbs', exphbs({
 }));
 
 app.set('view engine', 'hbs');
+
+app.use(session({
+    name:   "theserversession",
+    secret: "K7smsx9MsEasad89wEzVp5EeCep5s",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
 
 app.use('/', require('./routes/home'));
 
