@@ -2,13 +2,50 @@
 
 let router = require('express').Router();
 let User = require('../models/User');
+let bcrypt = require('bcrypt-nodejs');
 
 //hämtar startsidan
 
 router.route('/')
     .get(function (req, res) {
-        res.render(('basic/index'));
-});
+        User.find({}, function (error, data) {
+            let context = {
+                users: data.map(function (data) {
+                    return {
+                        username: data.username,
+                        password: data.password
+                    };
+                })
+            };
+            res.render('basic/index', context);
+
+        });
+
+    })
+    .post(function (req, res) {
+        let checkUser = User.find({'username': req.body.username});
+        checkUser.exec().then(function (data) {
+            bcrypt.compare(req.body.password, data[0].password, function (error, result) {
+                if (result) {
+                    req.session.user = data[0];
+                    //req.locals.user = req.session.user;
+                    res.redirect('/');
+                } else {
+                    console.log('nu funkar det inte');
+                    console.log(error);
+                    res.redirect('/sign-up')
+                }
+            });
+        })
+            .catch(function (err) {
+                if (err) {
+                    console.log('nu är det ett error');
+                    console.log(err);
+
+                    res.redirect('/');
+                }
+            })
+    });
 
 //hämtar sidan för att sign up
 //skapar en ny user, kollar om den finns, annars sparar den.
