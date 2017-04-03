@@ -22,6 +22,10 @@ body{
     font-weight: 100;
 }
 
+header a {
+    color: black;
+}
+
 
 #wrapper h1 {
     font-family: Helvetica;
@@ -44,7 +48,7 @@ body{
 
 #footer{
     width: auto;
-    background-color: rgba(211, 211, 230, 0.19);
+    background-color: white;
     height: 40px;
     padding-top: 5px;
     margin-top: 20px;
@@ -81,5 +85,27 @@ li a {
     font-family: Helvetica;
     font-weight: 100;
     font-size: 45px;
+
+}
+
+#sign-up-title {
+    font-family: Helvetica;
+    font-weight: 100;
+}
+
+#start {
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+#start a {
+    color: black;
+    text-decoration: none;
+
+}
+
+#start a:hover {
+    text-decoration: underline;
 
 }
