@@ -6,7 +6,17 @@
          <input type="password" name="password" placeholder="password">
          <input type="submit" name="submit" value="log in">
         Not a member? Sign up <a href="/sign-up">here</a>.
+
+        {{#if user}}
+
+            <a href="/logged-out" id="loggOut">Log out</a>
+        {{/if}}
+
     </form>
+
+
+
+
 
 
 </header>

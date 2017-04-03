@@ -63,3 +63,9 @@ body{
     font-family: Helvetica;
     color: red;
 }
+
+#loggOut{
+    color: black;
+    margin-left: 800px;
+
+}

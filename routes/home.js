@@ -80,6 +80,13 @@ router.route('/sign-up')
 
         });
 
+router.route('/logged-out')
+    .get(function (req, res) {
+        req.session.destroy();
+        res.locals.user = undefined;
+        res.render('basic/logged-out');
+    });
+
 
 
 module.exports = router;
