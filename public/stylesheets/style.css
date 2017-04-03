@@ -69,3 +69,17 @@ body{
     margin-left: 800px;
 
 }
+
+li {
+    display: inline;
+    padding-left: 100px;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 45px;
+
+}

@@ -9,9 +9,15 @@
    {{>header}}
 
     <div id="wrapper">
-
+        {{#if user}}
+            <ul>
+                <li><a href="/images">Images</a> </li>
+                <li><a href="/profil">My profile</a> </li>
+            </ul>
+        {{/if}}
 
         {{{body}}}
+
     </div>
     {{>footer}}
     </body>

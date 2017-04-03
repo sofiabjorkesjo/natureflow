@@ -29,7 +29,7 @@ router.route('/')
                 if (result) {
                     req.session.user = data[0];
                     //req.locals.user = req.session.user;
-                    res.redirect('/');
+                    res.redirect('/images');
                 } else {
                     console.log('nu funkar det inte');
                     console.log(error);
@@ -85,6 +85,11 @@ router.route('/logged-out')
         req.session.destroy();
         res.locals.user = undefined;
         res.render('basic/logged-out');
+    });
+
+router.route('/images')
+    .get(function (req, res) {
+        res.render('basic/images');
     });
 
 
