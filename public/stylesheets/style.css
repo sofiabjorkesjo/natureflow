@@ -72,7 +72,7 @@ body{
 
 li {
     display: inline;
-    padding-left: 100px;
+    margin-right: 100px;
 }
 
 li a {

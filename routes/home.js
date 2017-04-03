@@ -92,6 +92,14 @@ router.route('/images')
         res.render('basic/images');
     });
 
+router.route('/profile')
+    .get(function (req, res) {
+        res.render('basic/profile');
+    });
 
+router.route('/upload')
+    .get(function (req, res) {
+        res.render('basic/upload');
+    });
 
 module.exports = router;
