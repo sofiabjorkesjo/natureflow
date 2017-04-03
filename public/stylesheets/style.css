@@ -27,9 +27,13 @@ body{
 }
 
 .imgSlide {
-    width: 700px;
-    height: 350px;
+    width: 800px;
+    height: 450px;
+
 }
 
+#imgDiv {
+    width: 800px;
+}
 
 
