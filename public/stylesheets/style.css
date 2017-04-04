@@ -131,12 +131,18 @@ a {
     text-decoration: none;
 }
 
-a:hover {
 
-    font-weight: bold;
-}
 
 p {
     font-family: Helvetica;
     font-weight: 100;
+}
+
+#addPicture {
+    background-image: url('');
+    background-size: cover;
+    height: 200px;
+    width: 250px;
+    border: 1px solid #000000;
+
 }
