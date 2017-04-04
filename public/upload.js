@@ -4,13 +4,6 @@
 
 window.onload = function () {
 
-    let test = document.createElement('p');
-    test.textContent = 'hejsan';
-    let wrapper = document.getElementById('wrapper');
-    wrapper.appendChild(test);
-
-
-
     let uploadPicture = document.getElementById('uploadPicture');
     let addPicture = document.getElementById('addPicture');
     
