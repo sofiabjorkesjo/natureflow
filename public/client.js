@@ -11,9 +11,17 @@ img3.setAttribute('class', 'imgSlide');
 img3.setAttribute('src', '/slideshow/3.jpg');
 
 let buttonLeft = document.createElement('button');
-buttonLeft.setAttribute('class', 'buttonLeft');
+buttonLeft.setAttribute('class', 'button');
+buttonLeft.textContent = 'next';
 let buttonRight = document.createElement('button');
-buttonRight.setAttribute('class', 'buttonRight');
+buttonRight.setAttribute('class', 'button');
+buttonRight.textContent = 'next';
+
+let buttonDiv = document.createElement('div');
+buttonDiv.setAttribute('id', 'buttonDiv');
+buttonDiv.appendChild(buttonLeft);
+buttonDiv.appendChild(buttonRight);
+
 
 let imgDiv = document.createElement('div');
 imgDiv.setAttribute('id', 'imgDiv');
@@ -22,9 +30,9 @@ let wrapper = document.getElementById('wrapper');
 imgDiv.appendChild(img);
 imgDiv.appendChild(img2);
 imgDiv.appendChild(img3);
-imgDiv.appendChild(buttonLeft);
-imgDiv.appendChild(buttonRight);
+
 wrapper.appendChild(imgDiv);
+wrapper.appendChild(buttonDiv);
 
 buttonLeft.addEventListener('click', function () {
     plusDivs(-1);

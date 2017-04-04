@@ -42,7 +42,16 @@ header a {
 
 #imgDiv {
     width: 800px;
-    background-color: aqua;
+    background-color: white;
+    margin-bottom: 5px;
+
+}
+
+#buttonDiv {
+    width: 400px;
+    height: 50px;
+    background-color: white;
+    padding-left: 500px;
 }
 
 
