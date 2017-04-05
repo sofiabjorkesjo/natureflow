@@ -139,7 +139,12 @@ p {
 }
 
 #imageDiv {
-    width: 100%;
+    width: 300px;
     overflow-x: auto;
+
+}
+
+#imageDiv img {
+    width: 100%;
 
 }
