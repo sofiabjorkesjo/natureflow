@@ -5,7 +5,7 @@
 window.onload = function () {
 
     let uploadPicture = document.getElementById('uploadPicture');
-    let addPicture = document.getElementById('addPicture');
+    let imageDiv = document.getElementById('imageDiv');
     
     uploadPicture.addEventListener('change', function () {
         let file = uploadPicture.files[0];
@@ -15,17 +15,17 @@ window.onload = function () {
             let reader = new FileReader();
 
             reader.onload = function (e) {
-                addPicture.innerHTML = "";
+                imageDiv.innerHTML = "";
 
                 let img = new Image();
                 img.src = reader.result;
 
-                addPicture.appendChild(img);
+                imageDiv.appendChild(img);
             };
 
             reader.readAsDataURL(file);
         } else {
-            addPicture.innerHTML = "File not supported";
+            imageDiv.innerHTML = "File not supported";
         }
     });
 }
