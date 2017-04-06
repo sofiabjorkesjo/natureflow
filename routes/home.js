@@ -115,7 +115,12 @@ router.route('/upload')
             res.redirect('/403');
         }
 
-    });
+    })
+    .post(function (req, res) {
+        if(req.session.user) {
+
+        }
+    })
 
 router.route('/403')
     .get(function (req, res) {
