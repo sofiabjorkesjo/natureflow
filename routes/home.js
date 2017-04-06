@@ -4,6 +4,7 @@ let router = require('express').Router();
 let User = require('../models/User');
 let Image = require('../models/Image');
 let bcrypt = require('bcrypt-nodejs');
+let fs = require('fs');
 
 //hämtar startsidan
 
@@ -122,9 +123,21 @@ router.route('/upload')
             let image = new Image({
                 img: req.body.img
             });
-            image.img.data = fs.readFileSync(imgPath)
+           // image.img.data = fs.readFileSync(imgPath)
             console.log('testetst');
             console.log(image);
+            image.save()
+                .then(function () {
+                    res.redirect('/images')
+                })
+                .catch(function (err) {
+                    if (err) {
+                        console.log('det sparades inte');
+                        res.redirect('/upload');
+                    }
+                })
+        } else {
+            res.redirect('/403');
         }
     })
 
