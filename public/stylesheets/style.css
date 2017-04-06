@@ -152,3 +152,11 @@ p {
     width: 100%;
 
 }
+
+#uploadDiv {
+    padding: 10px;
+    background-color: aqua;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
