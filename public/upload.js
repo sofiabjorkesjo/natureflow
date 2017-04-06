@@ -26,18 +26,6 @@ window.onload = function () {
 
                 imageDiv.appendChild(img);
 
-                let uploadButton = document.createElement('input');
-                uploadButton.setAttribute('type', 'submit');
-                uploadButton.setAttribute('value', 'upload');
-                wrapper.appendChild(uploadButton);
-
-                //if satsen funkar ej - fixa
-                if (uploadButton = true) {
-                    console.log('tjotjo')
-                   wrapper.removeChild(wrapper.childNodes[0]);
-                } else {
-                    wrapper.appendChild(uploadButton);
-                }
 
             };
 
