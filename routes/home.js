@@ -91,11 +91,21 @@ router.route('/logged-out')
 
 router.route('/images')
     .get(function (req, res) {
-        if(req.session.user) {
+
+            Image.find({}, function (error, data) {
+                let context = {
+                    allImages: data.map(function(image) {
+                        return {
+                            buffer: image.img.data
+                        };
+                    })
+                };
+                console.log('tjotjo');
+                console.log(context)
             res.render('basic/images');
-        } else {
-            res.redirect('/403');
-        }
+            });
+
+
 
     });
 
@@ -120,14 +130,15 @@ router.route('/upload')
     })
     .post(function (req, res) {
         if(req.session.user) {
-            console.log(req.files.img);
+
             let image = new Image({
-                img: req.files.img,
+                img: req.files.img
 
             });
 
            // image.img.data = fs.readFileSync(imgPath)
             console.log('testetst');
+
             console.log(image);
 
 
