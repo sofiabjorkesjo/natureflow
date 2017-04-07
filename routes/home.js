@@ -83,6 +83,8 @@ router.route('/sign-up')
 
     });
 
+//hämar sidan för att ha loggad ut
+
 router.route('/logged-out')
     .get(function (req, res) {
         req.session.destroy();
@@ -140,6 +142,7 @@ router.route('/images')
         let context = {
             allImages: data.map(function (image) {
                 return {
+                    //funkar inte - fixa
                     buffer: btoa(image.img),
                 id: image._id,
                     name: image.name,
