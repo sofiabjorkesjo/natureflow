@@ -120,12 +120,17 @@ router.route('/upload')
     })
     .post(function (req, res) {
         if(req.session.user) {
+            console.log(req.files.img);
             let image = new Image({
-                img: req.body.img
+                img: req.files.img,
+
             });
+
            // image.img.data = fs.readFileSync(imgPath)
             console.log('testetst');
             console.log(image);
+
+
             image.save()
                 .then(function () {
                     res.redirect('/images')
@@ -136,10 +141,10 @@ router.route('/upload')
                         res.redirect('/upload');
                     }
                 })
-        } else {
-            res.redirect('/403');
-        }
-    })
+         } else {
+             res.redirect('/403');
+         }
+  })
 
 router.route('/403')
     .get(function (req, res) {

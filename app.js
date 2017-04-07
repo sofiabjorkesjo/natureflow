@@ -11,8 +11,11 @@ let bodyParser = require('body-parser');
 //kan använda sökvägar
 let path = require('path');
 
+let fileUpload = require('express-fileupload');
+
 
 let app = express();
+app.use(fileUpload());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
