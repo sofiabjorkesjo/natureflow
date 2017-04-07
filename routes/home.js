@@ -5,6 +5,7 @@ let User = require('../models/User');
 let Image = require('../models/Image');
 let bcrypt = require('bcrypt-nodejs');
 let fs = require('fs');
+let btoa = require('btoa');
 
 //hämtar startsidan
 
@@ -54,69 +55,39 @@ router.route('/')
 
 router.route('/sign-up')
     .get(function (req, res) {
-            res.render('basic/sign_up');
+        res.render('basic/sign_up');
     })
     .post(function (req, res) {
-            let userObject = new User({
-                    username: req.body.username,
-                    password: req.body.password
-            });
-
-            User.findOne({username: req.body.username}).then(function (data) {
-                    if (data) {
-                            console.log('user finns redan');
-                    } else {
-                            userObject.save()
-                                .then(function () {
-                                        console.log(userObject);
-                                        res.redirect('/')
-                                })
-                                .catch(function (err) {
-                                        if (err) {
-                                                console.log(err);
-                                        }
-                                        res.redirect('/sign-up');
-                                });
-                    }
-            });
-
+        let userObject = new User({
+            username: req.body.username,
+            password: req.body.password
         });
+
+        User.findOne({username: req.body.username}).then(function (data) {
+            if (data) {
+                console.log('user finns redan');
+            } else {
+                userObject.save()
+                    .then(function () {
+                        console.log(userObject);
+                        res.redirect('/')
+                    })
+                    .catch(function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.redirect('/sign-up');
+                    });
+            }
+        });
+
+    });
 
 router.route('/logged-out')
     .get(function (req, res) {
         req.session.destroy();
         res.locals.user = undefined;
         res.render('basic/logged-out');
-    });
-
-router.route('/images')
-    .get(function (req, res) {
-
-            Image.find({}, function (error, data) {
-                let context = {
-                    allImages: data.map(function(image) {
-                        return {
-                            buffer: image.img.data
-                        };
-                    })
-                };
-                console.log('tjotjo');
-                console.log(context)
-            res.render('basic/images');
-            });
-
-
-
-    });
-
-router.route('/profile')
-    .get(function (req, res) {
-        if (req.session.user) {
-            res.render('basic/profile');
-        } else {
-            res.redirect('/403');
-        }
-
     });
 
 router.route('/upload')
@@ -129,14 +100,17 @@ router.route('/upload')
 
     })
     .post(function (req, res) {
-        if(req.session.user) {
+        if (req.session.user) {
 
             let image = new Image({
-                img: req.files.img
+                img: req.files.img,
+                name: req.files.img.name,
+                type: req.files.img.mimetype
+
 
             });
 
-           // image.img.data = fs.readFileSync(imgPath)
+            // image.img.data = fs.readFileSync(imgPath)
             console.log('testetst');
 
             console.log(image);
@@ -152,10 +126,43 @@ router.route('/upload')
                         res.redirect('/upload');
                     }
                 })
-         } else {
-             res.redirect('/403');
-         }
-  })
+        } else {
+            res.redirect('/403');
+        }
+    })
+
+
+router.route('/images')
+    .get(function (req, res) {
+        Image.find({}, function (error, data) {
+
+
+        let context = {
+            allImages: data.map(function (image) {
+                return {
+                    buffer: btoa(image.img),
+                id: image._id,
+                    name: image.name,
+                    type: image.type
+                };
+            })
+        };
+        console.log('tjotjo');
+        console.log(context.allImages[0].buffer);
+        res.render('basic/images', context);
+    });
+    });
+
+router.route('/profile')
+    .get(function (req, res) {
+        if (req.session.user) {
+            res.render('basic/profile');
+        } else {
+            res.redirect('/403');
+        }
+
+    });
+
 
 router.route('/403')
     .get(function (req, res) {
