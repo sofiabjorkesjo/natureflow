@@ -148,7 +148,6 @@ router.route('/images')
             })
         };
         console.log('tjotjo');
-        console.log(context.allImages[0].buffer);
         res.render('basic/images', context);
     });
     });
