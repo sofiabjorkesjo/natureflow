@@ -25,6 +25,7 @@ window.onload = function () {
                 img.src = reader.result;
 
                 imageDiv.appendChild(img);
+                console.log(img.src);
 
 
             };

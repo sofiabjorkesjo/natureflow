@@ -94,11 +94,9 @@ router.route('/logged-out')
 
 router.route('/upload')
     .get(function (req, res) {
-        if (req.session.user) {
+
             res.render('basic/upload');
-        } else {
-            res.redirect('/403');
-        }
+
 
     })
     .post(function (req, res) {
@@ -115,7 +113,9 @@ router.route('/upload')
             // image.img.data = fs.readFileSync(imgPath)
             console.log('testetst');
 
-            console.log(image);
+            //kanske göra så?
+           // console.log(req.files.img.data)
+
 
 
             image.save()
@@ -141,16 +141,26 @@ router.route('/images')
 
         let context = {
             allImages: data.map(function (image) {
+               // let test = btoa(image.img);
+               // let test2 = atob(test);
                 return {
                     //funkar inte - fixa
                     buffer: btoa(image.img),
                 id: image._id,
                     name: image.name,
                     type: image.type
+
+
                 };
+
+
+
             })
+
         };
-        console.log('tjotjo');
+      //  console.log('tjotjo');
+           // console.log(context.buffer);
+
         res.render('basic/images', context);
     });
     });
