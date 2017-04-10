@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 let imageSchema = new mongoose.Schema({
-    img: {data: Buffer, encodedType: String},
+    img: {data: Buffer, contentType: String},
     name: {type: String},
     type: {type: String}
 

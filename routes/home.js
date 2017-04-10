@@ -103,10 +103,10 @@ router.route('/upload')
         if (req.session.user) {
 
             let image = new Image({
-                img: req.files.img,
-                name: req.files.img.name,
-                type: req.files.img.mimetype
 
+                name: req.files.img.name,
+                type: req.files.img.mimetype,
+                img: req.files.img.data
 
             });
 
@@ -114,7 +114,7 @@ router.route('/upload')
             console.log('testetst');
 
             //kanske göra så?
-           // console.log(req.files.img.data)
+         console.log(req.files.img)
 
 
 
@@ -143,10 +143,11 @@ router.route('/images')
             allImages: data.map(function (image) {
                // let test = btoa(image.img);
                // let test2 = atob(test);
+
                 return {
                     //funkar inte - fixa
-                    buffer: btoa(image.img),
-                id: image._id,
+                    buffer: btoa(image),
+                    id: image._id,
                     name: image.name,
                     type: image.type
 
