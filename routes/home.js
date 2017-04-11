@@ -103,28 +103,35 @@ router.route('/upload')
     })
     .post(function (req, res) {
         //if (req.session.user) {
-            let options = {
-                host: 'www.google.com'
-                , port: 80
-                , path: '/images/logos/ps_logo2.png'
-            }
+            let image = req.files.imgFile;
 
-            var request = http.get(options, function(res){
-                var imagedata = ''
-                res.setEncoding('binary')
+            image.mv('public/images/' + req.files.imgFile.name, function() {
+                console.log("yay");
 
-                res.on('data', function(chunk){
-                    imagedata += chunk
-                })
-
-                res.on('end', function(){
-                    fs.writeFile('public/images/logo.png', imagedata, 'binary', function(err){
-                        if (err) throw err
-                        console.log('File saved.')
-                    })
-                })
-
-            })
+                res.redirect('/images');
+            });
+        //     let options = {
+        //         host: 'www.google.com'
+        //         , port: 80
+        //         , path: '/images/logos/ps_logo2.png'
+        //     }
+        //
+        //     var request = http.get(options, function(res){
+        //         var imagedata = ''
+        //         res.setEncoding('binary')
+        //
+        //         res.on('data', function(chunk){
+        //             imagedata += chunk
+        //         })
+        //
+        //         res.on('end', function(){
+        //             fs.writeFile('public/images/logo.png', imagedata, 'binary', function(err){
+        //                 if (err) throw err
+        //                 console.log('File saved.')
+        //             })
+        //         })
+        //
+        //     })
 
             // console.log(req.files.imgFile)
 
