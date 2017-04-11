@@ -4,8 +4,10 @@ let router = require('express').Router();
 let User = require('../models/User');
 let Image = require('../models/Image');
 let bcrypt = require('bcrypt-nodejs');
+let http = require('http');
 let fs = require('fs');
 let btoa = require('btoa');
+let bodyParser = require('body-parser');
 
 //hämtar startsidan
 
@@ -100,38 +102,81 @@ router.route('/upload')
 
     })
     .post(function (req, res) {
-        if (req.session.user) {
+        //if (req.session.user) {
+            let options = {
+                host: 'www.google.com'
+                , port: 80
+                , path: '/images/logos/ps_logo2.png'
+            }
 
-            let image = new Image({
+            var request = http.get(options, function(res){
+                var imagedata = ''
+                res.setEncoding('binary')
 
-                name: req.files.img.name,
-                type: req.files.img.mimetype,
-                img: req.files.img.data
-
-            });
-
-            // image.img.data = fs.readFileSync(imgPath)
-            console.log('testetst');
-
-            //kanske göra så?
-         console.log(req.files.img)
-
-
-
-            image.save()
-                .then(function () {
-                    res.redirect('/images')
+                res.on('data', function(chunk){
+                    imagedata += chunk
                 })
-                .catch(function (err) {
-                    if (err) {
-                        console.log('det sparades inte');
-                        res.redirect('/upload');
-                    }
+
+                res.on('end', function(){
+                    fs.writeFile('public/images/logo.png', imagedata, 'binary', function(err){
+                        if (err) throw err
+                        console.log('File saved.')
+                    })
                 })
-        } else {
-            res.redirect('/403');
-        }
-    })
+
+            })
+
+            // console.log(req.files.imgFile)
+
+            //test
+
+          // let tmp_path = req.files.img.path;
+          //   let target_path = './public/images' + req.files.img.name;
+          //
+          //   fs.rename(tmp_path, target_path, function (err) {
+          //       if (err) {
+          //           throw err;
+          //       }
+          //       fs.unlink(tmp_path, function (err) {
+          //           if (err) {
+          //               throw err;
+          //           }
+          //           res.send('File uploaded to:' + target_path + ' - ' + req.files.img.size + 'bytes');
+          //       });
+          //   });
+
+            //gamla
+         //
+         //    let image = new Image({
+         //
+         //        name: req.files.img.name,
+         //        type: req.files.img.mimetype,
+         //        img: req.files.img.data
+         //
+         //    });
+         //
+         //
+         //    console.log('testetst');
+         //
+         //    //kanske göra så?
+         // console.log(req.files.img)
+         //
+         //
+         //
+         //    image.save()
+         //        .then(function () {
+         //            res.redirect('/images')
+         //        })
+         //        .catch(function (err) {
+         //            if (err) {
+         //                console.log('det sparades inte');
+         //                res.redirect('/upload');
+         //            }
+         //        })
+        // } else {
+        //     res.redirect('/403');
+        // }
+    });
 
 
 router.route('/images')

@@ -20,6 +20,8 @@ app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+//app.use(bodyParser({uploadDir: './images'}));
+
 let port = process.env.PORT || 3000;
 
 //connectar till mongoose
