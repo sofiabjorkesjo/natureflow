@@ -105,10 +105,25 @@ router.route('/upload')
         //if (req.session.user) {
             let image = req.files.imgFile;
 
-            image.mv('public/images/' + req.files.imgFile.name, function() {
+            let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
+
+            image.mv('public/images/' + imageName, function(error) {
+                if (error) return console.log(error);
+
                 console.log("yay");
 
-                res.redirect('/images');
+                let image = new Image({
+                    path: imageName,
+                    owner: req.session.user.username
+                });
+
+                image.save(function(error) {
+                    if (error) return console.log("error :(");
+
+                    console.log("yay");
+
+                    res.redirect('/images');
+                });
             });
         //     let options = {
         //         host: 'www.google.com'

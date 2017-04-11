@@ -1,10 +1,8 @@
 let mongoose = require('mongoose');
 
 let imageSchema = new mongoose.Schema({
-    img: {data: Buffer, contentType: String},
-    name: {type: String},
-    type: {type: String}
-
+    path: {type: String},
+    owner: {type: String}
 });
 
 let Image = mongoose.model('Image', imageSchema);
