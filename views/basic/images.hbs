@@ -1,6 +1,6 @@
 <p>Här ska det vara bilder</p>
-{{#each allImages}}
-<img src="data:{{this.type}};base64,{{this.buffer}}" >
+{{#each images}}
+<img src='/images/{{ this.path }}' >
 {{/each}}
 
 

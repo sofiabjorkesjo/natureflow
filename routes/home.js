@@ -203,33 +203,34 @@ router.route('/upload')
 
 router.route('/images')
     .get(function (req, res) {
+        // Image.find({owner: req.session.user.username}, function (error, data) {
         Image.find({}, function (error, data) {
+            if (error) return console.log("error");
 
-
-        let context = {
-            allImages: data.map(function (image) {
-               // let test = btoa(image.img);
-               // let test2 = atob(test);
-
-                return {
-                    //funkar inte - fixa
-                    buffer: btoa(image),
-                    id: image._id,
-                    name: image.name,
-                    type: image.type
-
-
-                };
-
-
-
-            })
-
-        };
+            res.render("basic/images", {images: data});
+        // let context = {
+        //     allImages: data.map(function (image) {
+        //
+        //
+        //         return {
+        //             //funkar inte - fixa
+        //             buffer: btoa(image),
+        //             id: image._id,
+        //             name: image.name,
+        //             type: image.type
+        //
+        //
+        //         };
+        //
+        //
+        //
+        //     })
+        //
+        // };
       //  console.log('tjotjo');
            // console.log(context.buffer);
 
-        res.render('basic/images', context);
+
     });
     });
 
