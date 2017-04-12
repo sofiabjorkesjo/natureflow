@@ -208,28 +208,6 @@ router.route('/images')
             if (error) return console.log("error");
 
             res.render("basic/images", {images: data});
-        // let context = {
-        //     allImages: data.map(function (image) {
-        //
-        //
-        //         return {
-        //             //funkar inte - fixa
-        //             buffer: btoa(image),
-        //             id: image._id,
-        //             name: image.name,
-        //             type: image.type
-        //
-        //
-        //         };
-        //
-        //
-        //
-        //     })
-        //
-        // };
-      //  console.log('tjotjo');
-           // console.log(context.buffer);
-
 
     });
     });
