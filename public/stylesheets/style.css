@@ -1,5 +1,5 @@
 #wrapper {
-    max-width: 60%;
+    max-width: 70%;
     background-color: white;
     margin: 0 auto;
     height: 100%;
@@ -169,7 +169,10 @@ p {
 
 .images {
     width: 330px;
-    background-color: aqua;
-    float: left;
-    margin: 10px;
+    background-color: rgba(211, 211, 230, 0.22);
+
+    margin: auto 10px 15px;
+    display: inline-block;
+    padding-bottom: 5px;
+
 }
