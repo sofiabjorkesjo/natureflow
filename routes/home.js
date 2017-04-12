@@ -9,7 +9,7 @@ let fs = require('fs');
 let btoa = require('btoa');
 let bodyParser = require('body-parser');
 
-//hämtar startsidan
+//hämtar startsidan & hittar alla användare som finns registrerade
 
 router.route('/')
     .get(function (req, res) {
@@ -23,10 +23,10 @@ router.route('/')
                 })
             };
             res.render('basic/index', context);
-
         });
-
     })
+
+    // kollar om användaren finns registrerad
     .post(function (req, res) {
         let checkUser = User.find({'username': req.body.username});
         checkUser.exec().then(function (data) {
@@ -36,7 +36,6 @@ router.route('/')
                     //req.locals.user = req.session.user;
                     res.redirect('/images');
                 } else {
-                    console.log('nu funkar det inte');
                     console.log(error);
                     res.redirect('/sign-up')
                 }
@@ -44,9 +43,7 @@ router.route('/')
         })
             .catch(function (err) {
                 if (err) {
-                    console.log('nu är det ett error');
                     console.log(err);
-
                     res.redirect('/');
                 }
             })
@@ -94,24 +91,25 @@ router.route('/logged-out')
         res.render('basic/logged-out');
     });
 
+//hämtar sidan för att ladda upp en bild
+
 router.route('/upload')
     .get(function (req, res) {
-
+        if (req.session.user) {
             res.render('basic/upload');
-
-
+        } else {
+            res.redirect('/403');
+        }
     })
+
+    //sparar bilden på servern och databasen när den laddas upp
+
     .post(function (req, res) {
-        //if (req.session.user) {
+        if (req.session.user) {
             let image = req.files.imgFile;
-
             let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
-
             image.mv('public/images/' + imageName, function(error) {
                 if (error) return console.log(error);
-
-                console.log("yay");
-
                 let image = new Image({
                     path: imageName,
                     owner: req.session.user.username
@@ -119,35 +117,38 @@ router.route('/upload')
 
                 image.save(function(error) {
                     if (error) return console.log("error :(");
-
-                    console.log("yay");
-
                     res.redirect('/images');
                 });
-            });
-
+            })
+        } else {
+            res.redirect('/403');
+        }
     });
 
 
 router.route('/images')
     .get(function (req, res) {
-        // Image.find({owner: req.session.user.username}, function (error, data) {
-        Image.find({}, function (error, data) {
-            if (error) return console.log("error");
-
-            res.render('basic/images', {images: data});
-
-    });
+        if (req.session.user) {
+            // Image.find({owner: req.session.user.username}, function (error, data) {
+            Image.find({}, function (error, data) {
+                if (error) return console.log("error");
+                res.render('basic/images', {images: data});
+            })
+        } else {
+            res.redirect('/403');
+        }
     });
 
 router.route('/profile')
     .get(function (req, res) {
-      Image.find({owner: req.session.user.username}, function (error, data) {
-          if (error) return console.log('error');
-
-          res.render('basic/profile', {images: data});
-      });
-
+        if(req.session.user) {
+             Image.find({owner: req.session.user.username}, function (error, data) {
+                if (error) return console.log('error');
+                 res.render('basic/profile', {images: data});
+             })
+        } else {
+            res.redirect('/403');
+        }
     });
 
 

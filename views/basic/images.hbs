@@ -1,7 +1,11 @@
 
+
 {{#each images}}
-    <div class="imageDiv">
+    <div class="images">
+      <p>Published by {{owner}}</p>
+        <div class="imageDiv">
 <img src='/images/{{ this.path }}' >
+    </div>
     </div>
 {{/each}}
 

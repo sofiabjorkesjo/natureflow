@@ -151,14 +151,11 @@ p {
 .imageDiv {
     width: 300px;
     overflow-x: auto;
-    float: left;
-    padding: 6px;
-
+    margin: auto;
 }
 
 .imageDiv img {
     width: 100%;
-
 }
 
 #uploadDiv {
@@ -168,4 +165,11 @@ p {
     height: 500px;
     margin: 0 auto;
 
+}
+
+.images {
+    width: 330px;
+    background-color: aqua;
+    float: left;
+    margin: 10px;
 }
