@@ -1,10 +1,10 @@
 #wrapper {
     max-width: 60%;
     background-color: white;
-    margin: auto;
+    margin: 0 auto;
     height: 100%;
     text-align: center;
-    padding: inherit;
+
 
 
 
@@ -12,6 +12,8 @@
 
 body{
     background-color: white;
+    min-height: 100%;
+
 }
 
 #header {
@@ -67,11 +69,15 @@ header a {
 
 
 #footer{
-    width: auto;
+   clear: both;
+    position: relative;
+    z-index: 10;
+    height: 10px;
+    margin-top: 5px;
     background-color: white;
-    height: 40px;
-    padding-top: 5px;
-    margin-top: 20px;
+    text-align: center;
+
+
 }
 
 #footer p {
@@ -142,13 +148,15 @@ p {
     font-weight: 100;
 }
 
-#imageDiv {
+.imageDiv {
     width: 300px;
     overflow-x: auto;
+    float: left;
+    padding: 6px;
 
 }
 
-#imageDiv img {
+.imageDiv img {
     width: 100%;
 
 }
@@ -159,4 +167,5 @@ p {
     width: 500px;
     height: 500px;
     margin: 0 auto;
+
 }

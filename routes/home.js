@@ -125,79 +125,7 @@ router.route('/upload')
                     res.redirect('/images');
                 });
             });
-        //     let options = {
-        //         host: 'www.google.com'
-        //         , port: 80
-        //         , path: '/images/logos/ps_logo2.png'
-        //     }
-        //
-        //     var request = http.get(options, function(res){
-        //         var imagedata = ''
-        //         res.setEncoding('binary')
-        //
-        //         res.on('data', function(chunk){
-        //             imagedata += chunk
-        //         })
-        //
-        //         res.on('end', function(){
-        //             fs.writeFile('public/images/logo.png', imagedata, 'binary', function(err){
-        //                 if (err) throw err
-        //                 console.log('File saved.')
-        //             })
-        //         })
-        //
-        //     })
 
-            // console.log(req.files.imgFile)
-
-            //test
-
-          // let tmp_path = req.files.img.path;
-          //   let target_path = './public/images' + req.files.img.name;
-          //
-          //   fs.rename(tmp_path, target_path, function (err) {
-          //       if (err) {
-          //           throw err;
-          //       }
-          //       fs.unlink(tmp_path, function (err) {
-          //           if (err) {
-          //               throw err;
-          //           }
-          //           res.send('File uploaded to:' + target_path + ' - ' + req.files.img.size + 'bytes');
-          //       });
-          //   });
-
-            //gamla
-         //
-         //    let image = new Image({
-         //
-         //        name: req.files.img.name,
-         //        type: req.files.img.mimetype,
-         //        img: req.files.img.data
-         //
-         //    });
-         //
-         //
-         //    console.log('testetst');
-         //
-         //    //kanske göra så?
-         // console.log(req.files.img)
-         //
-         //
-         //
-         //    image.save()
-         //        .then(function () {
-         //            res.redirect('/images')
-         //        })
-         //        .catch(function (err) {
-         //            if (err) {
-         //                console.log('det sparades inte');
-         //                res.redirect('/upload');
-         //            }
-         //        })
-        // } else {
-        //     res.redirect('/403');
-        // }
     });
 
 
