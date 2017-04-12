@@ -172,7 +172,8 @@ p {
     background-color: rgba(211, 211, 230, 0.22);
 
     margin: auto 10px 15px;
+    padding-top: 10px;
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
 
 }
