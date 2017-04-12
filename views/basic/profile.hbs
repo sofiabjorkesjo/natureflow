@@ -1,1 +1,6 @@
-<p>Här ska det vara en profil med bilder</p>
+
+{{#each images}}
+    <div class="imageDiv">
+        <img src='/images/{{ this.path }}' >
+    </div>
+{{/each}}

@@ -135,18 +135,18 @@ router.route('/images')
         Image.find({}, function (error, data) {
             if (error) return console.log("error");
 
-            res.render("basic/images", {images: data});
+            res.render('basic/images', {images: data});
 
     });
     });
 
 router.route('/profile')
     .get(function (req, res) {
-        if (req.session.user) {
-            res.render('basic/profile');
-        } else {
-            res.redirect('/403');
-        }
+      Image.find({owner: req.session.user.username}, function (error, data) {
+          if (error) return console.log('error');
+
+          res.render('basic/profile', {images: data});
+      });
 
     });
 
