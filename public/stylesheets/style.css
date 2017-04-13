@@ -177,3 +177,8 @@ p {
     padding-bottom: 8px;
 
 }
+
+.fail {
+    font-family: Helvetica;
+    color: darkred;
+}

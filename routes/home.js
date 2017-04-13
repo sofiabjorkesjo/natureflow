@@ -38,7 +38,7 @@ router.route('/')
                 } else {
                     req.session.flash = {
                         type: 'fail',
-                        message: error.message + '. Wrong username or password.'
+                        message:'Wrong username or password.'
                     };
                     res.redirect('/');
                 }
