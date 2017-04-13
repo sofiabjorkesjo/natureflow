@@ -33,7 +33,7 @@ router.route('/')
             bcrypt.compare(req.body.password, data[0].password, function (error, result) {
                 if (result) {
                     req.session.user = data[0];
-                    req.locals.user = req.session.user;
+                   // req.locals.user = req.session.user;
                     res.redirect('/images');
                 } else {
                     req.session.flash = {
