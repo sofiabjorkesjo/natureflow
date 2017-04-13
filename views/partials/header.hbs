@@ -5,9 +5,9 @@
 
 
         {{#if user}}
-           You are logged in as: {{user.username}}
+           <div class="header_text">You are logged in as: {{user.username}}</div>
 
-            <a href="/logged-out" id="loggOut">Log out</a>
+            <div class="loggOut"><a href="/logged-out">Log out</a></div>
 
         {{else}}
             Log in:   <input type="text" name="username" placeholder="username">
