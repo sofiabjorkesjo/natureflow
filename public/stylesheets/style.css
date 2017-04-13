@@ -1,6 +1,6 @@
 #wrapper {
     max-width: 70%;
-    background-color: white;
+    background-color:white;
     margin: 0 auto;
     height: 100%;
     text-align: center;
@@ -102,7 +102,10 @@ header a {
 
 li {
     display: inline;
-    margin-right: 100px;
+    margin: 2%;
+
+
+
 }
 
 li a {
@@ -170,15 +173,23 @@ p {
 .images {
     width: 330px;
     background-color: rgba(211, 211, 230, 0.22);
-
     margin: auto 10px 15px;
     padding-top: 10px;
     display: inline-block;
     padding-bottom: 8px;
+    box-shadow: 1px 1px 7px #909090;
 
 }
 
 .fail {
     font-family: Helvetica;
     color: darkred;
+}
+
+#usernameProfile {
+    font-family: Helvetica;
+    height: 50px;
+    font-weight: 100;
+    font-size: 20px;
+
 }
