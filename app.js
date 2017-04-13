@@ -5,7 +5,7 @@ let express = require('express');
 let exphbs = require('express-handlebars');
 //kan spara ner data
 let session = require('express-session');
-var mongoose = require('./config/db');
+let mongoose = require('./config/db');
 //req.body
 let bodyParser = require('body-parser');
 //kan använda sökvägar

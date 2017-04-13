@@ -1,3 +1,5 @@
+'use strict';
+
 let mongoose = require('mongoose');
 
 let imageSchema = new mongoose.Schema({
