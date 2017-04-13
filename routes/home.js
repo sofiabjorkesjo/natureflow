@@ -33,11 +33,14 @@ router.route('/')
             bcrypt.compare(req.body.password, data[0].password, function (error, result) {
                 if (result) {
                     req.session.user = data[0];
-                    //req.locals.user = req.session.user;
+                    req.locals.user = req.session.user;
                     res.redirect('/images');
                 } else {
-                    console.log(error);
-                    res.redirect('/sign-up')
+                    req.session.flash = {
+                        type: 'fail',
+                        message: error.message + '. Wrong username or password.'
+                    };
+                    res.redirect('/');
                 }
             });
         })
@@ -62,18 +65,26 @@ router.route('/sign-up')
             password: req.body.password
         });
 
+        //hittar en användare
+
         User.findOne({username: req.body.username}).then(function (data) {
             if (data) {
-                console.log('user finns redan');
+                req.session.flash = {
+                    type: 'fail',
+                    message: 'Thie username already exist. Please try another one.'
+                };
+                res.redirect('/sign-up');
             } else {
                 userObject.save()
                     .then(function () {
-                        console.log(userObject);
                         res.redirect('/')
                     })
                     .catch(function (err) {
                         if (err) {
-                            console.log(err);
+                           req.session.flash = {
+                               type: 'fail',
+                               message: err.message + '. The password must be of minimum lenghh six charachters, and the username four charachters.'
+                           };
                         }
                         res.redirect('/sign-up');
                     });

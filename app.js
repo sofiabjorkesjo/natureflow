@@ -51,6 +51,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+//flash meddelanden.
+//får man en request där session är satt så sätter man responsen till det.
+app.use(function (req, res, next) {
+    res.locals.flash = req.session.flash;
+    delete req.session.flash;
+    next();
+});
+
 app.use('/', require('./routes/home'));
 
 //public mappen
