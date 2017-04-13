@@ -48,6 +48,7 @@ router.route('/')
                 if (err) {
                     console.log(err);
                     res.redirect('/');
+                    console.log('hej');
                 }
             })
     });

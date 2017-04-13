@@ -4,8 +4,6 @@
     <list default="true" id="2c48ad7f-3a82-49b1-b2bc-30b27e4df161" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/home.js" afterPath="$PROJECT_DIR$/routes/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/basic/index.hbs" afterPath="$PROJECT_DIR$/views/basic/index.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/header.hbs" afterPath="$PROJECT_DIR$/views/partials/header.hbs" />
     </list>
     <ignored path="sb223fz-project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            <state relative-caret-position="360">
+              <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -98,7 +96,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.hbs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="header.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/partials/header.hbs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -155,8 +153,8 @@
         <option value="$PROJECT_DIR$/views/basic/sign_up.hbs" />
         <option value="$PROJECT_DIR$/views/layouts/default.hbs" />
         <option value="$PROJECT_DIR$/views/basic/index.hbs" />
-        <option value="$PROJECT_DIR$/routes/home.js" />
         <option value="$PROJECT_DIR$/views/partials/header.hbs" />
+        <option value="$PROJECT_DIR$/routes/home.js" />
       </list>
     </option>
   </component>
@@ -340,7 +338,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../1dv023/sb223fz-examination-2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../1dv023/sb223fz-examination-3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
@@ -437,12 +435,12 @@
       <workItem from="1491821335931" duration="5215000" />
       <workItem from="1491912052931" duration="6694000" />
       <workItem from="1491985873137" duration="12454000" />
-      <workItem from="1492068521383" duration="3342000" />
+      <workItem from="1492068521383" duration="4405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91744000" />
+    <option name="totallyTimeSpent" value="92807000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2963" y="23" width="1655" height="922" extended-state="0" />
@@ -809,14 +807,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/layouts/default.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -845,6 +835,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
           <folding />
         </state>
       </provider>
