@@ -119,9 +119,20 @@ router.route('/upload')
     .post(function (req, res) {
         if (req.session.user) {
             let image = req.files.imgFile;
+            if (image){
+
+
             let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
             image.mv('public/images/' + imageName, function(error) {
-                if (error) return console.log(error);
+                if (error) {
+
+                    req.session.flash = {
+                       type: 'fail',
+                        Message: 'You must select a photo to upload.'
+                    };
+                    console.log('error här');
+                    return console.log(error);
+                }
                 let image = new Image({
                     path: imageName,
                     owner: req.session.user.username
@@ -132,6 +143,16 @@ router.route('/upload')
                     res.redirect('/images');
                 });
             })
+            } else {
+                //Inget flash meddelande, fixa.
+                console.log('feeel');
+                req.session.flash = {
+                    type: 'fail',
+                    Message: 'You must select a photo to upload.'
+                };
+                res.redirect('/upload');
+            }
+
         } else {
             res.redirect('/403');
         }
