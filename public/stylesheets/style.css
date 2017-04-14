@@ -110,9 +110,6 @@ header a {
 li {
     display: inline;
     margin: 2%;
-
-
-
 }
 
 li a {
@@ -146,16 +143,32 @@ li a {
 
 }
 
-a {
-    color: black;
-    text-decoration: none;
+#publishedBy {
+    font-family: Helvetica;
+    font-weight: 100;
+}
+
+#commentLink  {
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 14px;
+    float: left;
+    padding-left: 20px;
+}
+
+#comments {
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 14px;
+    float: right;
+    padding-right: 20px;
 }
 
 
 
-p {
-    font-family: Helvetica;
-    font-weight: 100;
+a {
+    color: black;
+    text-decoration: none;
 }
 
 .imageDiv {
@@ -185,8 +198,8 @@ p {
     display: inline-block;
     padding-bottom: 8px;
     box-shadow: 1px 1px 7px #909090;
-
 }
+
 
 .fail {
     font-family: Helvetica;

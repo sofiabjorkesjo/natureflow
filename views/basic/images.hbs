@@ -2,10 +2,12 @@
 
 {{#each images}}
     <div class="images">
-      <p>Published by {{owner}}</p>
+      <p id="publishedBy">Published by {{owner}}</p>
         <div class="imageDiv">
 <img src='/images/{{ this.path }}' >
     </div>
+        <p id="commentLink">Add comment</p>
+        <p id="comments">Comments: (0)</p>
     </div>
 {{/each}}
 
