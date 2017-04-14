@@ -126,10 +126,10 @@ router.route('/upload')
             image.mv('public/images/' + imageName, function(error) {
                 if (error) {
 
-                    req.session.flash = {
-                       type: 'fail',
-                        Message: 'You must select a photo to upload.'
-                    };
+                    // req.session.flash = {
+                    //    type: 'fail',
+                    //     Message: 'You must select a photo to upload.'
+                    // };
                     console.log('error här');
                     return console.log(error);
                 }
