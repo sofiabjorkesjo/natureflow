@@ -135,7 +135,8 @@ router.route('/upload')
                 }
                 let image = new Image({
                     path: imageName,
-                    owner: req.session.user.username
+                    owner: req.session.user.username,
+                    date: Date.now()
                 });
 
                 image.save(function(error) {
@@ -165,6 +166,9 @@ router.route('/images')
             // Image.find({owner: req.session.user.username}, function (error, data) {
             Image.find({}, function (error, data) {
                 if (error) return console.log("error");
+                data.sort(function (a, b) {
+                    return b.date - a.date;
+                });
                 res.render('basic/images', {images: data});
             })
         } else {
