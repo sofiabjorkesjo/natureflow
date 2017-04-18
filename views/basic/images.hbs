@@ -4,11 +4,14 @@
     <div class="images">
       <p id="publishedBy">Published by {{owner}}</p>
         <div class="imageDiv">
-<img src='/images/{{ this.path }}' >
+<a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
+            
     </div>
         <p id="commentLink">Add comment</p>
         <p id="comments">Comments: (0)</p>
     </div>
 {{/each}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox-plus-jquery.js"></script>
 
 
