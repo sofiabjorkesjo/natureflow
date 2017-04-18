@@ -153,13 +153,15 @@ a {
 }
 
 .imageDiv {
-    width: 300px;
-    overflow-x: auto;
+    width: 280px;
+    overflow-x: hidden;
     margin: auto;
 }
 
 .imageDiv img {
-    width: 100%;
+
+    height: 250px;
+
 }
 
 #uploadDiv {
@@ -172,7 +174,7 @@ a {
 }
 
 .images {
-    width: 330px;
+    width: 350px;
     background-color: rgba(211, 211, 230, 0.22);
     margin: auto 10px 15px;
     padding-top: 10px;
