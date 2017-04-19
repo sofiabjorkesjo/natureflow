@@ -171,14 +171,6 @@ a {
     font-weight: 100;
 }
 
-#commentLink  {
-    font-family: Helvetica;
-    font-weight: 100;
-    font-size: 14px;
-    float: left;
-    padding-left: 16px;
-}
-
 #comments {
     font-family: Helvetica;
     font-weight: 100;
@@ -234,13 +226,20 @@ a {
     cursor: pointer;
 }
 
-#addComment {
+/* end modal comment*/
+
+.addComment {
     background: none!important;
     border: none;
-    padding: 0!important;
+    padding: 16px;
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 14px;
+    float: left;
+
 }
 
-#addComment:focus {
+.addComment:focus {
     border: none!important;
     outline: none;
 
