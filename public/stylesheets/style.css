@@ -1,19 +1,21 @@
+body{
+    background-color: white;
+    min-height: 100%;
+}
+
 #wrapper {
     max-width: 70%;
     background-color:white;
     margin: 0 auto;
     height: 100%;
     text-align: center;
-
-
-
-
 }
 
-body{
-    background-color: white;
-    min-height: 100%;
-
+#wrapper h1 {
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 60px;
+    text-align: center;
 }
 
 #header {
@@ -48,26 +50,15 @@ header a {
     margin-bottom: 30px;
 }
 
-
-#wrapper h1 {
-    font-family: Helvetica;
-    font-weight: 100;
-    font-size: 60px;
-    text-align: center;
-}
-
 .imgSlide {
     width: 100%;
 
 }
 
-
-
 #imgDiv {
     width: 800px;
     background-color: white;
     margin: 0 auto;
-
 }
 
 #imgDiv img {
@@ -77,13 +68,9 @@ header a {
 #buttonDiv {
     width: 50%;
     height: 50px;
-    background-color: white;
-    margin: 0 auto;
+    background-color: white;  margin: 0 auto;
 
 }
-
-
-
 
 #footer{
    clear: both;
@@ -93,8 +80,6 @@ header a {
     margin-top: 5px;
     background-color: white;
     text-align: center;
-
-
 }
 
 #footer p {
@@ -102,7 +87,6 @@ header a {
     font-weight: 100;
     text-align: center;
     font-size: 13px;
-
 }
 
 #logged_in_user{
@@ -122,7 +106,6 @@ li a {
     font-family: Helvetica;
     font-weight: 100;
     font-size: 45px;
-
 }
 
 #sign-up-title {
@@ -214,5 +197,51 @@ a {
     height: 50px;
     font-weight: 100;
     font-size: 20px;
+
+}
+
+/*Modal comment*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+}
+
+.modal-content {
+    background-color: aqua;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #000;
+    width: 80%;
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: #909090;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#addComment {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+}
+
+#addComment:focus {
+    border: none!important;
+    outline: none;
 
 }
