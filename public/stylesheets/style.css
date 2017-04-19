@@ -209,9 +209,12 @@ a {
     background-color: rgba(226, 226, 226, 0.90);
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #000;
-    width: 80%;
+    width: 70%;
+    font-family: Helvetica;
+    font-weight: 100;
 }
+
+
 
 .close {
     color: black;

@@ -7,21 +7,19 @@ let span = document.getElementsByClassName('close')[0];
 
 
 for (let i = 0; i < btn.length; i++) {
-    btn[i].onclick = function () {
+    btn[i].addEventListener('click', function () {
         modal.style.display = 'block';
-    };
-
+    });
 }
 
-
-span.onclick = function () {
+span.addEventListener('click', function () {
     modal.style.display = 'none';
-};
+});
 
-window.onclick = function (event) {
+window.addEventListener('click', function () {
     if (event.target == modal) {
         modal.style.display = 'none';
     }
-};
+});
 
-//funkar inte med class, måste loopa igenom alla .
+
