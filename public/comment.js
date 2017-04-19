@@ -22,4 +22,5 @@ window.addEventListener('click', function () {
     }
 });
 
+//Klickar upp boxen för att skriva kommentar, kan klicka ner den också,
 

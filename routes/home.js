@@ -8,6 +8,7 @@ let http = require('http');
 let fs = require('fs');
 let btoa = require('btoa');
 let bodyParser = require('body-parser');
+let Comment = require('../models/Comment');
 
 //hämtar startsidan & hittar alla användare som finns registrerade
 
@@ -159,6 +160,7 @@ router.route('/upload')
         }
     });
 
+//hittar och visar alla bilder
 
 router.route('/images')
     .get(function (req, res) {
@@ -173,6 +175,29 @@ router.route('/images')
             })
         } else {
             res.redirect('/403');
+        }
+    })
+
+    //postar kommentarer till bilderna.
+
+
+    .post(function (req, res) {
+        if (req.session.user) {
+            let comment = new Comment({
+                text: req.body.comment,
+                owner: req.session.user.username,
+                date: Date.now()
+            });
+            comment.save()
+                .then(function () {
+                    res.redirect('/images');
+                })
+                .catch(function (err) {
+                    if (err) {
+                        console.log(err);
+                        console.log('error comments');
+                    }
+                })
         }
     });
 
