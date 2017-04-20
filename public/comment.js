@@ -29,5 +29,6 @@ window.addEventListener('click', function () {
 
 
 
-//Klickar upp boxen för att skriva kommentar, kan klicka ner den också,
+//Klickar upp boxen för att skriva kommentar, och klicka ner boxen
+
 
