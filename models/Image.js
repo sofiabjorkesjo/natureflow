@@ -5,7 +5,8 @@ let mongoose = require('mongoose');
 let imageSchema = new mongoose.Schema({
     path: {type: String},
     owner: {type: String},
-    date: {type: Date, default: Date.now}
+    date: {type: Date, default: Date.now},
+    imageId: {type: String}
 });
 
 let Image = mongoose.model('Image', imageSchema);

@@ -47,9 +47,12 @@ router.route('/')
         })
             .catch(function (err) {
                 if (err) {
+                    req.session.flash = {
+                        type: 'fail',
+                        message:'Wrong username or password.'
+                    };
                     console.log(err);
                     res.redirect('/');
-                    console.log('hej');
                 }
             })
     });
@@ -183,10 +186,12 @@ router.route('/images')
 
     .post(function (req, res) {
         if (req.session.user) {
+            console.log(req.body.test);
             let comment = new Comment({
                 text: req.body.comment,
                 owner: req.session.user.username,
-                date: Date.now()
+                date: Date.now(),
+                imageId: req.body.test
             });
             comment.save()
                 .then(function () {
