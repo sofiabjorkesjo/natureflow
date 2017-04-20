@@ -206,6 +206,9 @@ router.route('/profile')
         if(req.session.user) {
              Image.find({owner: req.session.user.username}, function (error, data) {
                 if (error) return console.log('error');
+                 data.sort(function (a, b) {
+                     return b.date - a.date;
+                 });
                  res.render('basic/profile', {images: data});
              })
         } else {
