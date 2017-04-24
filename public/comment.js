@@ -11,7 +11,6 @@ let nrOfImages = btn.length;
 for (let i = 0; i < nrOfImages; i++) {
     btn[i].addEventListener('click', function () {
         modal[i].style.display = 'block';
-        document.querySelector(".imageidtest").value = i;
     });
     span[i].addEventListener('click', function () {
         modal[i].style.display = 'none';

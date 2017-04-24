@@ -169,12 +169,34 @@ router.route('/images')
     .get(function (req, res) {
         if (req.session.user) {
             // Image.find({owner: req.session.user.username}, function (error, data) {
-            Image.find({}, function (error, data) {
+            Image.find({}, function (error, images) {
                 if (error) return console.log("error");
-                data.sort(function (a, b) {
+                images.sort(function (a, b) {
                     return b.date - a.date;
                 });
-                res.render('basic/images', {images: data});
+
+                Comment.find({}, function(error, comments) {
+                    let images2 = [];
+                    for (let i = 0; i < images.length; i++) {
+                        images2[i] = {};
+                        images2[i].path = images[i].path;
+                        images2[i].owner = images[i].owner;
+                        images2[i].date = images[i].date;
+                        images2[i].id = images[i]._id;
+
+                        images2[i].comments = [];
+                        // Add comments
+                        // console.log(comments);
+                        for (let j = 0; j < comments.length; j++) {
+                            if (images[i]._id == comments[j].imageId) {
+                                console.log("comment!");
+                                images2[i].comments.push(comments[j]);
+                            }
+                        }
+                    }
+                    console.log(images2);
+                    res.render('basic/images', {images: images2});
+                });
             })
         } else {
             res.redirect('/403');
@@ -186,12 +208,12 @@ router.route('/images')
 
     .post(function (req, res) {
         if (req.session.user) {
-            console.log(req.body.test);
+            console.log(req.body.imageId);
             let comment = new Comment({
                 text: req.body.comment,
                 owner: req.session.user.username,
                 date: Date.now(),
-                imageId: req.body.test
+                imageId: req.body.imageId
             });
             comment.save()
                 .then(function () {

@@ -7,8 +7,14 @@
 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             
     </div>
+
+
         <button class="addComment">Add comment</button>
         <p id="comments">Comments: (0)</p>
+        {{#each this.comments}}
+                   <p>{{this.text}}</p>
+            {{/each}}
+
     </div>
 
 
@@ -19,7 +25,7 @@
         <span class="close">&times;</span>
         <p>Write a comment here</p>
         <form action="/images" method="post">
-            <input type="hidden" name="test" class="imageidtest">
+            <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
             <textarea rows="6" cols="50" name="comment"></textarea>
             <br>
             <input type="submit" value="Post comment" class="postComment">
