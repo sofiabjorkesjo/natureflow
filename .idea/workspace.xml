@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2c48ad7f-3a82-49b1-b2bc-30b27e4df161" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/comment.js" afterPath="$PROJECT_DIR$/public/comment.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/home.js" afterPath="$PROJECT_DIR$/routes/home.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/basic/images.hbs" afterPath="$PROJECT_DIR$/views/basic/images.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/header.hbs" afterPath="$PROJECT_DIR$/views/partials/header.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/basic/profile.hbs" afterPath="$PROJECT_DIR$/views/basic/profile.hbs" />
     </list>
     <ignored path="sb223fz-project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="184" column="54" selection-start-line="184" selection-start-column="54" selection-end-line="184" selection-end-column="54" />
+            <state relative-caret-position="492">
+              <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -85,18 +85,18 @@
       <file leaf-file-name="images.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/basic/images.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
+            <state relative-caret-position="300">
+              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="289" column="17" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+            <state relative-caret-position="112">
+              <caret line="286" column="23" selection-start-line="286" selection-start-column="23" selection-end-line="286" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -105,8 +105,8 @@
       <file leaf-file-name="profile.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/basic/profile.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="150">
+              <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -155,14 +155,14 @@
         <option value="$PROJECT_DIR$/models/User.js" />
         <option value="$PROJECT_DIR$/views/basic/upload.hbs" />
         <option value="$PROJECT_DIR$/views/layouts/default.hbs" />
-        <option value="$PROJECT_DIR$/views/basic/profile.hbs" />
         <option value="$PROJECT_DIR$/models/Comment.js" />
         <option value="$PROJECT_DIR$/models/Image.js" />
-        <option value="$PROJECT_DIR$/routes/home.js" />
         <option value="$PROJECT_DIR$/public/comment.js" />
         <option value="$PROJECT_DIR$/views/partials/header.hbs" />
         <option value="$PROJECT_DIR$/views/basic/images.hbs" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
+        <option value="$PROJECT_DIR$/views/basic/profile.hbs" />
+        <option value="$PROJECT_DIR$/routes/home.js" />
       </list>
     </option>
   </component>
@@ -468,16 +468,16 @@
       <workItem from="1492675840058" duration="7124000" />
       <workItem from="1492703303299" duration="299000" />
       <workItem from="1492977205894" duration="55000" />
-      <workItem from="1493016542662" duration="9445000" />
+      <workItem from="1493016542662" duration="10933000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137825000" />
+    <option name="totallyTimeSpent" value="139313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2960" y="23" width="1680" height="1027" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18203737" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -485,7 +485,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2342246" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2342246" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -806,26 +806,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="184" column="54" selection-start-line="184" selection-start-column="54" selection-end-line="184" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/Comment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/basic/profile.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -838,14 +822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/default.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/partials/header.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -854,18 +830,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/basic/images.hbs">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
+        <state relative-caret-position="112">
+          <caret line="286" column="23" selection-start-line="286" selection-start-column="23" selection-end-line="286" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
+    <entry file="file://$PROJECT_DIR$/views/layouts/default.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="289" column="17" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+        <state relative-caret-position="210">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/basic/profile.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/basic/images.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
           <folding />
         </state>
       </provider>

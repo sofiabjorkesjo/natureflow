@@ -182,6 +182,7 @@ router.route('/images')
                         images2[i].path = images[i].path;
                         images2[i].owner = images[i].owner;
                         images2[i].date = images[i].date;
+
                         images2[i].id = images[i]._id;
 
                         images2[i].comments = [];
@@ -194,7 +195,7 @@ router.route('/images')
                             }
                         }
                     }
-                    console.log(images2);
+
                     res.render('basic/images', {images: images2});
                 });
             })

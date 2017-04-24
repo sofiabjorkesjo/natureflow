@@ -284,10 +284,7 @@ a {
 
 .date {
     font-size: 12px;
-}
-
-hr {
-    color: black;
+    font-style: italic;
 }
 
 .CommentsDiv h2 {
