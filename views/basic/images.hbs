@@ -2,25 +2,15 @@
 
 {{#each images}}
     <div class="images">
-      <p id="publishedBy">Published by {{owner}}</p>
+      <p id="publishedBy">Published by <span class="user">{{owner}}</span></p>
         <div class="imageDiv">
 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
-            
     </div>
-
-
         <button class="addComment">Add comment</button>
-        <p id="comments">Comments: (0)</p>
-        {{#each this.comments}}
-                   <p>{{this.text}}</p>
-            {{/each}}
-
+        <button class="comments">Comments</button>
     </div>
 
-
-
-
-<div class="modal">
+<div class="model">
     <div class="modal-content">
         <span class="close">&times;</span>
         <p>Write a comment here</p>
@@ -32,6 +22,23 @@
         </form>
     </div>
 </div>
+
+    <div class="modelComments">
+         <div class="modelComments-content">
+
+             <span class="closeComments">x</span>
+               <div class="CommentsDiv">
+                   <h2>Comments</h2>
+               </div>
+             {{#each this.comments}}
+                 <div class="commentsDiv">
+                    <p><span class="ownerComment">{{this.owner}}</span> "{{this.text}}"</p>
+                     <p class="date">{{this.date}}</p>
+                 </div>
+                 <hr>
+             {{/each}}
+         </div>
+    </div>
 
 {{/each}}
 
