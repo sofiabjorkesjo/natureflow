@@ -10,8 +10,12 @@ let userSchema = new mongoose.Schema({
     password: {type: String, required: true}
 });
 
+userSchema.path('username').validate(function (username) {
+    return username.length >= 4;
+}, 'The username must be of minimum length 4 characters');
+
 userSchema.path('password').validate(function (password) {
-    return password.length >= 4;
+    return password.length >= 6;
 }, 'The password must be of minimum length 6 characters');
 
 userSchema.pre('save', function (next) {

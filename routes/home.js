@@ -6,8 +6,6 @@ let Image = require('../models/Image');
 let bcrypt = require('bcrypt-nodejs');
 let http = require('http');
 let fs = require('fs');
-let btoa = require('btoa');
-let bodyParser = require('body-parser');
 let Comment = require('../models/Comment');
 
 //hämtar startsidan & hittar alla användare som finns registrerade
@@ -34,7 +32,6 @@ router.route('/')
             bcrypt.compare(req.body.password, data[0].password, function (error, result) {
                 if (result) {
                     req.session.user = data[0];
-                   // req.locals.user = req.session.user;
                     res.redirect('/images');
                 } else {
                     req.session.flash = {
@@ -76,7 +73,7 @@ router.route('/sign-up')
             if (data) {
                 req.session.flash = {
                     type: 'fail',
-                    message: 'Thie username already exist. Please try another one.'
+                    message: 'This username already exist. Please try another one.'
                 };
                 res.redirect('/sign-up');
             } else {
@@ -98,7 +95,7 @@ router.route('/sign-up')
 
     });
 
-//hämar sidan för att ha loggad ut
+//hämar sidan för att ha loggad ut o sätter användaren till undefind
 
 router.route('/logged-out')
     .get(function (req, res) {
@@ -124,20 +121,14 @@ router.route('/upload')
         if (req.session.user) {
             let image = req.files.imgFile;
             if (image){
+                 let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
+                 image.mv('public/images/' + imageName, function(error) {
+                      if (error) {
 
-
-            let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
-            image.mv('public/images/' + imageName, function(error) {
-                if (error) {
-
-                    // req.session.flash = {
-                    //    type: 'fail',
-                    //     Message: 'You must select a photo to upload.'
-                    // };
-                    console.log('error här');
-                    return console.log(error);
-                }
-                let image = new Image({
+                        console.log('error här');
+                        return console.log(error);
+                      }
+                  let image = new Image({
                     path: imageName,
                     owner: req.session.user.username,
                     date: Date.now()
@@ -150,11 +141,12 @@ router.route('/upload')
             })
             } else {
                 //Inget flash meddelande, fixa.
-                console.log('feeel');
+
                 req.session.flash = {
                     type: 'fail',
                     Message: 'You must select a photo to upload.'
                 };
+                console.log('feeel');
                 res.redirect('/upload');
             }
 
