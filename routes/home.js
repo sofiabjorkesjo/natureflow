@@ -216,7 +216,16 @@ router.route('/images')
                     if (err) {
                         console.log(err);
                         console.log('error comments');
+                        req.session.flash = {
+                            type: 'fail',
+                            Message: err.message + 'You must select a photo to upload.'
+                        };
                     }
+                    res.redirect('/images');
+                    req.session.flash = {
+                        type: 'fail',
+                        Message: err.message + 'You must select a photo to upload.'
+                    };
                 })
         }
     });

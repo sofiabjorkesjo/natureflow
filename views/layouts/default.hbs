@@ -8,9 +8,11 @@
     <body>
 
    {{>header}}
-
+   {{>flash}}
     <div id="wrapper">
+
       {{#if user}}
+          {{>flash}}
           <div id="menu">
             <ul>
                 <li><a href="/images">Images</a> </li>
