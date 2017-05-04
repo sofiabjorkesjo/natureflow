@@ -180,10 +180,10 @@ router.route('/upload')
 //hittar och visar alla bilder
 
 router.route('/images')
-    .get(function (req, res) {
+    .get(function getImages (req, res) {
         if (req.session.user) {
             // Image.find({owner: req.session.user.username}, function (error, data) {
-            Image.find({}, function (error, images) {
+            Image.find({}, function Test (error, images) {
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
                     return b.date - a.date;

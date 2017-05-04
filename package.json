@@ -4,7 +4,7 @@
   "description": "Project",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tester/test.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,9 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "blanket": "^1.2.3",
     "chai": "^3.5.0",
     "mocha": "^3.3.0"
   }
+
 }
