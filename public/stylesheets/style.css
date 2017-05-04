@@ -246,6 +246,11 @@ a {
     cursor: pointer;
 }
 
+.counterText {
+    font-size: 12px;
+
+}
+
 /* end model add comment*/
 
 /* start model read comments */

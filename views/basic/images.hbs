@@ -16,9 +16,10 @@
         <p>Write a comment here</p>
         <form action="/images" method="post">
             <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
-            <input disabled maxlength="30" size="3" value="30" id="counter">
-            <textarea rows="6" cols="50" name="comment" onkeyup="textCounter(this, 'counter', 30)" class="messageComment"></textarea>
+            <textarea rows="6" cols="50" name="comment" class="messageComment"></textarea>
             <br>
+
+            <span class="counterText">You have <input disabled maxlength="30" size="3" value="30" id="counter"> charachters to write.</span>
             <input type="submit" value="Post comment" class="postComment">
         </form>
     </div>
