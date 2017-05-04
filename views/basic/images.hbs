@@ -16,7 +16,8 @@
         <p>Write a comment here</p>
         <form action="/images" method="post">
             <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
-            <textarea rows="6" cols="50" name="comment"></textarea>
+            <input disabled maxlength="30" size="3" value="30" id="counter">
+            <textarea rows="6" cols="50" name="comment" onkeyup="textCounter(this, 'counter', 30)" class="messageComment"></textarea>
             <br>
             <input type="submit" value="Post comment" class="postComment">
         </form>
@@ -40,6 +41,6 @@
     </div>
 
 {{/each}}
-
+<script src="count.js"></script>
 <script src="comment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox-plus-jquery.js"></script>

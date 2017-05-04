@@ -245,14 +245,11 @@ router.route('/images')
                         console.log('error comments');
                         req.session.flash = {
                             type: 'fail',
-                            Message: err.message + 'You must select a photo to upload.'
+                            message: 'The max length of comments are 30 characters'
                         };
                     }
                     res.redirect('/images');
-                    req.session.flash = {
-                        type: 'fail',
-                        Message: err.message + 'You must select a photo to upload.'
-                    };
+
                 })
         }
     });
