@@ -120,7 +120,8 @@ router.route('/upload')
     .post(function (req, res) {
         if (req.session.user) {
             let image = req.files.imgFile;
-            //console.log(req.files.imgFile);
+           // console.log('tetststsia');
+           // console.log(req.files.imgFile);
             //console.log(req.files.imgFile.mimetype);
 
 
@@ -141,6 +142,8 @@ router.route('/upload')
                             owner: req.session.user.username,
                             date: Date.now()
                         });
+
+
 
                         image.save(function (error) {
                             if (error) return console.log("error :(");
@@ -184,6 +187,7 @@ router.route('/images')
         if (req.session.user) {
             // Image.find({owner: req.session.user.username}, function (error, data) {
             Image.find({}, function Test (error, images) {
+               // console.log(images);
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
                     return b.date - a.date;
@@ -223,6 +227,7 @@ router.route('/images')
 
     .post(function (req, res) {
         if (req.session.user) {
+            console.log('test comment');
             console.log(req.body.imageId);
             let comment = new Comment({
                 text: req.body.comment,
@@ -254,6 +259,7 @@ router.route('/images')
 
 router.route('/profile')
     .get(function (req, res) {
+
         if(req.session.user) {
              Image.find({owner: req.session.user.username}, function (error, images) {
                 if (error) return console.log('error');
@@ -275,7 +281,7 @@ router.route('/profile')
                          // console.log(comments);
                          for (let j = 0; j < comments.length; j++) {
                              if (images[i]._id == comments[j].imageId) {
-                                 console.log("comment!");
+                                 //console.log("comment!");
                                  images2[i].comments.push(comments[j]);
                              }
                          }
@@ -284,6 +290,29 @@ router.route('/profile')
                      res.render('basic/profile', {images: images2});
                  });
              })
+        } else {
+            res.redirect('/403');
+        }
+    })
+
+    .post(function (req, res) {
+        console.log('hej');
+       // console.log(req.body._id);
+        console.log(req.params.images);
+        //console.log(req.files.image._id)
+
+        //console.log(req.body.imageId);
+        //console.log(req.params.imageId);
+        if (req.session.user) {
+            Image.findOneAndRemove({_id: req.params.imageId}, function (err) {
+               // console.log(req.params.imageId);
+                console.log('tjo');
+                if (err) {
+                    console.log('funkar ej remove');
+                    res.redirect('/images');
+                }
+
+            })
         } else {
             res.redirect('/403');
         }

@@ -4,6 +4,11 @@
 
 {{#each images}}
     <div class="images">
+        <form action="/profile" method="post">
+            <button class="deleteImage" value="{{this.id}}">X</button>
+
+        </form>
+
     <div class="imageDiv">
         <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
     </div>

@@ -195,6 +195,22 @@ a {
     font-size: 20px;
 }
 
+.deleteImage {
+    background: none!important;
+    border: none;
+    padding-righ: 16px;
+    margin-left: 50px;
+    margin-right: 20px;
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 14px;
+    float: right;
+}
+.deleteImage:focus {
+    border: none!important;
+    outline: none;
+}
+
 /*Modal comment*/
 .model {
     display: none;
