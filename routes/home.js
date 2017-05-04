@@ -120,35 +120,57 @@ router.route('/upload')
     .post(function (req, res) {
         if (req.session.user) {
             let image = req.files.imgFile;
-            if (image){
-                 let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
-                 image.mv('public/images/' + imageName, function(error) {
-                      if (error) {
+            //console.log(req.files.imgFile);
+            //console.log(req.files.imgFile.mimetype);
 
-                        console.log('error här');
-                        return console.log(error);
-                      }
-                  let image = new Image({
-                    path: imageName,
-                    owner: req.session.user.username,
-                    date: Date.now()
-                });
 
-                image.save(function(error) {
-                    if (error) return console.log("error :(");
-                    res.redirect('/images');
-                });
-            })
-            } else {
-                //Inget flash meddelande, fixa.
 
-                req.session.flash = {
-                    type: 'fail',
-                    Message: 'You must select a photo to upload.'
-                };
-                console.log('feeel');
-                res.redirect('/upload');
-            }
+
+            if (image) {
+                if (req.files.imgFile.mimetype == 'image/jpeg') {
+
+                    let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
+                    image.mv('public/images/' + imageName, function (error) {
+                        if (error) {
+
+                            console.log('error här');
+                            return console.log(error);
+                        }
+                        let image = new Image({
+                            path: imageName,
+                            owner: req.session.user.username,
+                            date: Date.now()
+                        });
+
+                        image.save(function (error) {
+                            if (error) return console.log("error :(");
+                            res.redirect('/images');
+                        });
+                    })
+
+                } else {
+                    //flash om de är nått annat än jpeg bild
+                    req.session.flash = {
+                        type: 'fail',
+                        message: 'Photo must be type image/jpeg'
+                    };
+                    console.log('must be jog ');
+                    res.redirect('/upload');
+                }
+
+                } else {
+                    //flash om man försöker ladda upp en bild utan att ha valt en
+
+                    req.session.flash = {
+                        type: 'fail',
+                        message: 'You must select a photo to upload.'
+                    };
+                    console.log('feeel');
+                    res.redirect('/upload');
+                }
+
+
+
 
         } else {
             res.redirect('/403');
@@ -182,7 +204,7 @@ router.route('/images')
                         // console.log(comments);
                         for (let j = 0; j < comments.length; j++) {
                             if (images[i]._id == comments[j].imageId) {
-                                console.log("comment!");
+                               // console.log("comment!");
                                 images2[i].comments.push(comments[j]);
                             }
                         }
