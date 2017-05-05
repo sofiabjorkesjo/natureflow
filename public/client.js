@@ -42,6 +42,10 @@ buttonRight.addEventListener('click', function () {
     plusDivs(1);
 });
 
+setInterval(function() {
+    plusDivs(1);
+}, 2000);
+
 //första bilden
 let slideIndex = 1;
 showDivs(slideIndex);

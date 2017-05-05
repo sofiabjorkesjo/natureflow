@@ -16,7 +16,7 @@
         <p>Write a comment here</p>
         <form action="/images" method="post">
             <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
-            <textarea rows="6" cols="50" name="comment" class="messageComment"></textarea>
+            <textarea rows="6" cols="50" name="comment" class="messageComment" maxlength="30"></textarea>
             <br>
             <!--<span class="counterText">You have <input disabled maxlength="30" size="2" value="30" class="counter"> charachters to write.</span> -->
             <span class="feedback"></span>

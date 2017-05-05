@@ -41,7 +41,6 @@ for (let i = 0; i < button.length; i ++) {
         modellComments[i].style.display = 'block';
     });
     closeButton[i].addEventListener('click', function () {
-        console.log('sss');
         modellComments[i].style.display = 'none';
 
 
@@ -51,7 +50,6 @@ for (let i = 0; i < button.length; i ++) {
 window.addEventListener('click', function () {
     for (let i = 0; i < button.length; i++) {
         if (event.target === modellComments[i]) {
-            console.log('sssjjjjj');
             modellComments[i].style.display = 'none';
           //  Clear();
         }
@@ -69,7 +67,7 @@ for(let i = 0; i < nrOfImages; i++) {
                if(textarea[j].value.length > 30) {
                    return false;
                }
-               feedback[a].textContent = 'kvar:' +(30-textarea[j].value.length);
+               feedback[a].textContent = 'You have ' + (30-textarea[j].value.length) + ' charachters to write';
            });
         }
     }
@@ -82,7 +80,7 @@ function Clear() {
         for(let j = 0; j < textarea.length; j++) {
            textarea[j].value = '';
            for (let a = 0; a < feedback.length; a++) {
-               feedback[a].textContent = 'kvar:' +(30-textarea[j].value.length);
+               feedback[a].textContent =  'You have ' + (30-textarea[j].value.length) + ' charachters to write';
            }
         }
     }

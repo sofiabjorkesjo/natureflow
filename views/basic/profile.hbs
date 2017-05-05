@@ -5,7 +5,8 @@
 {{#each images}}
     <div class="images">
         <form action="/profile" method="post">
-            <button class="deleteImage" value="{{this.id}}">X</button>
+            <input type="hidden" value="{{this.id}}" name="inputDelete">
+            <button class="deleteImage">X</button>
 
         </form>
 

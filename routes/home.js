@@ -294,21 +294,18 @@ router.route('/profile')
 
     .post(function (req, res) {
         console.log('hej');
-       // console.log(req.body._id);
-        console.log(req.params.images);
-        console.log(req.params.id);
+       console.log(req.body.inputDelete);
 
-        //console.log(req.body.imageId);
-        //console.log(req.params.imageId);
         if (req.session.user) {
-            Image.findOneAndRemove({_id: req.params.imageId}, function (err) {
+            Image.findOneAndRemove({_id: req.body.inputDelete}, function (err) {
                // console.log(req.params.imageId);
                 console.log('tjo');
                 if (err) {
                     console.log('funkar ej remove');
-                    res.redirect('/images');
+
                 }
 
+                res.redirect('/profile');
             })
         } else {
             res.redirect('/403');
