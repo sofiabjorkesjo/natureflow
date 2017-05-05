@@ -26,6 +26,7 @@
     "express-fileupload": "^0.1.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.2",
+    "handlebars-helpers": "^0.8.2",
     "mongoose": "^4.9.2",
     "node-fs": "^0.1.7",
     "path": "^0.12.7"
@@ -35,5 +36,4 @@
     "chai": "^3.5.0",
     "mocha": "^3.3.0"
   }
-
 }

@@ -10,7 +10,7 @@ let mongoose = require('./config/db');
 let bodyParser = require('body-parser');
 //kan använda sökvägar
 let path = require('path');
-
+let helpers = require('handlebars-helpers');
 let fileUpload = require('express-fileupload');
 
 
@@ -58,6 +58,13 @@ app.use(function (req, res, next) {
     delete req.session.flash;
     next();
 });
+
+// exphbs.helpers()
+// Handlebars.helpers('splitDate', function (date) {
+//     let d = date.split('GMT+0200');
+//     return d;
+//
+// });
 
 app.use('/', require('./routes/home'));
 
