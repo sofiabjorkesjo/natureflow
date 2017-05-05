@@ -5,7 +5,7 @@ let btn = document.querySelectorAll('.addComment');
 console.log(btn.length);
 let span = document.getElementsByClassName('close');
 
-let textarea = document.querySelector('.messageComment');
+
 
 let nrOfImages = btn.length;
 
@@ -13,9 +13,11 @@ let nrOfImages = btn.length;
 for (let i = 0; i < nrOfImages; i++) {
     btn[i].addEventListener('click', function () {
         modell[i].style.display = 'block';
+        Clear();
     });
     span[i].addEventListener('click', function () {
         modell[i].style.display = 'none';
+        Clear();
     });
 }
 
@@ -39,16 +41,55 @@ for (let i = 0; i < button.length; i ++) {
         modellComments[i].style.display = 'block';
     });
     closeButton[i].addEventListener('click', function () {
+        console.log('sss');
         modellComments[i].style.display = 'none';
+
+
     });
 }
 
 window.addEventListener('click', function () {
     for (let i = 0; i < button.length; i++) {
         if (event.target === modellComments[i]) {
+            console.log('sssjjjjj');
             modellComments[i].style.display = 'none';
-
+          //  Clear();
         }
     }
 });
+
+//räknar ner antal tecken i en kommentat
+
+let textarea = document.querySelectorAll('.messageComment');
+let feedback = document.querySelectorAll('.feedback');
+for(let i = 0; i < nrOfImages; i++) {
+    for(let j = 0; j < textarea.length; j++) {
+        for (let a = 0; a < feedback.length; a++) {
+           textarea[j].addEventListener('keyup', function () {
+               if(textarea[j].value.length > 30) {
+                   return false;
+               }
+               feedback[a].textContent = 'kvar:' +(30-textarea[j].value.length);
+           });
+        }
+    }
+}
+
+//sätter kommentarsfältet till tomt och nedräkningen återställs
+
+function Clear() {
+    for(let i = 0; i < nrOfImages; i++) {
+        for(let j = 0; j < textarea.length; j++) {
+           textarea[j].value = '';
+           for (let a = 0; a < feedback.length; a++) {
+               feedback[a].textContent = 'kvar:' +(30-textarea[j].value.length);
+           }
+        }
+    }
+}
+
+
+
+
+
 
