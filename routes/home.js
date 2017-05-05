@@ -296,7 +296,7 @@ router.route('/profile')
         console.log('hej');
        // console.log(req.body._id);
         console.log(req.params.images);
-        //console.log(req.files.image._id)
+        console.log(req.params.id);
 
         //console.log(req.body.imageId);
         //console.log(req.params.imageId);

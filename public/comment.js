@@ -5,6 +5,8 @@ let btn = document.querySelectorAll('.addComment');
 console.log(btn.length);
 let span = document.getElementsByClassName('close');
 
+let textarea = document.querySelector('.messageComment');
+
 let nrOfImages = btn.length;
 
 
@@ -45,6 +47,7 @@ window.addEventListener('click', function () {
     for (let i = 0; i < button.length; i++) {
         if (event.target === modellComments[i]) {
             modellComments[i].style.display = 'none';
+
         }
     }
 });
