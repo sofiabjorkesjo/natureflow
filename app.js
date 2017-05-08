@@ -68,21 +68,23 @@ app.use(function (req, res, next) {
 //     return d;
 //
 // });
-
-app.use('/', require('./routes/home'));
-
-//public mappen
-app.use(express.static(path.join(__dirname, 'public')));
-
 //startar
 let server = http.createServer(app).listen(port, function () {
     console.log('Express started on http://localhost' + port);
 });
+let io = require('socket.io')(server);
+app.use('/', require('./routes/home'));
+app.use('/', require('./routes/socketRoutes')(io));
+
+//public mappen
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 //ansluter och avslutar anslutningen till sockets.
 //requirar socket
 
-let io = require('socket.io')(server);
+
 io.on('connection', function (socket) {
     console.log("tesstttt");
     socket.emit('message', 'You are connected to sockets');
