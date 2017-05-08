@@ -27,7 +27,7 @@
 </div>
 
     <div class="modelComments">
-         <div class="modelComments-content">
+         <div class="modelComments-content" data-id="{{this.id}}">
 
              <span class="closeComments">x</span>
                <div class="CommentsDiv">
@@ -35,7 +35,7 @@
                </div>
              {{#each this.comments}}
                  <div class="commentsDiv">
-                    <p><span class="ownerComment">{{this.owner}}</span> "{{this.text}}"</p>
+                    <p class="testt"><span class="ownerComment">{{this.owner}}</span> "{{this.text}}"</p>
                      <p class="date">Published {{this.date}}</p>
                  </div>
              {{/each}}

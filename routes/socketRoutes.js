@@ -53,7 +53,7 @@ module.exports = function (io) {
 
         .post(function (req, res) {
             if (req.session.user) {
-                io.emit('hejsan testar testar');
+                io.emit('hej', 'hej');
                 console.log('test comment');
                 console.log(req.body.imageId);
                 let comment = new Comment({
@@ -62,8 +62,12 @@ module.exports = function (io) {
                     date: Date.now(),
                     imageId: req.body.imageId
                 });
+                console.log(comment);
+
                 comment.save()
                     .then(function () {
+                        io.emit("comment", comment);
+
                         res.redirect('/images');
                     })
                     .catch(function (err) {
