@@ -12,6 +12,7 @@ let bodyParser = require('body-parser');
 let path = require('path');
 let helpers = require('handlebars-helpers');
 let fileUpload = require('express-fileupload');
+let http = require('http');
 
 
 let app = express();
@@ -23,6 +24,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 //app.use(bodyParser({uploadDir: './images'}));
 
 let port = process.env.PORT || 3000;
+
+
 
 //connectar till mongoose
 mongoose();
@@ -72,6 +75,18 @@ app.use('/', require('./routes/home'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //startar
-app.listen(port, function () {
+let server = http.createServer(app).listen(port, function () {
     console.log('Express started on http://localhost' + port);
+});
+
+//ansluter och avslutar anslutningen till sockets.
+//requirar socket
+
+let io = require('socket.io')(server);
+io.on('connection', function (socket) {
+    console.log("tesstttt");
+    socket.emit('message', 'You are connected to sockets');
+    socket.on('disconnected', function () {
+        console.log('disconnected socket');
+    });
 });
