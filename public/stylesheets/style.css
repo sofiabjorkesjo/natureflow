@@ -176,7 +176,9 @@ a {
     font-weight: 100;
     font-size: 14px;
     float: right;
+    cursor: pointer;
 }
+
 
 .comments:focus {
     border: none!important;
@@ -205,6 +207,7 @@ a {
     font-weight: 100;
     font-size: 14px;
     float: right;
+    cursor: pointer;
 }
 .deleteImage:focus {
     border: none!important;
@@ -324,6 +327,7 @@ a {
     font-weight: 100;
     font-size: 14px;
     float: left;
+    cursor: pointer;
 }
 
 .addComment:focus {

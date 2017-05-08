@@ -11,7 +11,11 @@ let commentSchema = new mongoose.Schema({
 
 commentSchema.path('text').validate(function (text) {
     return text.length <= 30;
-}, 'Max 30 characters');
+}, 'The comment must be max 30 characters and minumum 1 charachters');
+
+commentSchema.path('text').validate(function (text) {
+    return text.length >= 1;
+}, 'The comment must be max 30 characters and minumum 1 charachters');
 
 let Comment = mongoose.model('Comment', commentSchema);
 

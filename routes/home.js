@@ -245,8 +245,9 @@ router.route('/images')
                         console.log('error comments');
                         req.session.flash = {
                             type: 'fail',
-                            message: 'The max length of comments are 30 characters'
+                            message: err.message + ' The comment must be max 30 characters and minumum 1 charachters'
                         };
+                        res.redirect('/images');
                     }
                     res.redirect('/images');
 
