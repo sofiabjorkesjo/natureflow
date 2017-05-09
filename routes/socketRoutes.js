@@ -59,7 +59,7 @@ module.exports = function (io) {
                 let comment = new Comment({
                     text: req.body.comment,
                     owner: req.session.user.username,
-                    date: Date.now(),
+                    date: Date.now().slice(1, 8),
                     imageId: req.body.imageId
                 });
                 console.log(comment);

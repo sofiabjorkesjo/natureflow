@@ -7,15 +7,15 @@ let socket = io();
 
 //skapar en ny kommentar med socket så att det uppdateras i realtid
 socket.on('comment', function (comment) {
-    console.log(comment);
+   // console.log(comment);
 
     let commentsContent = document.querySelectorAll('.modelComments-content');
+    let images = document.querySelectorAll('.images');
 
     //loopar igenom alla comments-content divar och väljer den som har samma id som kommentaren.
     //Då skapas en ny kommentar till den commments-content.
 
     for (let i = 0; i < commentsContent.length; i++) {
-        console.log(commentsContent[i].getAttribute("data-id") + " : " + comment.imageId);
         if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
             let commentDiv = document.createElement("div");
             commentDiv.setAttribute("class", "commentsDiv");
@@ -38,6 +38,10 @@ socket.on('comment', function (comment) {
             commentDiv.appendChild(date);
             commentsContent[i].appendChild(commentDiv);
 
+            //numret med antal bilder uppdateras
+
+            let commentNumber = images[i].querySelector('.commentsNumber');
+            commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
         }
     }
 });
