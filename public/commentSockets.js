@@ -33,7 +33,12 @@ socket.on('comment', function (comment) {
             commentDiv.appendChild(p);
             let date = document.createElement('p');
             date.setAttribute('class', 'date');
-            let dateText = document.createTextNode(comment.date);
+
+            //skapar datumet
+
+            comment.date = new Date();
+            let dateText = document.createTextNode('Published ' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString());
+
             date.appendChild(dateText);
             commentDiv.appendChild(date);
             commentsContent[i].appendChild(commentDiv);

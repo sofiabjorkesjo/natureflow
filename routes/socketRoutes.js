@@ -35,7 +35,12 @@ module.exports = function (io) {
                             for (let j = 0; j < comments.length; j++) {
                                 if (images[i]._id == comments[j].imageId) {
                                     // console.log("comment!");
-                                    images2[i].comments.push(comments[j]);
+                                    let comment = {};
+                                    comment.text = comments[j].text;
+                                    comment.owner = comments[j].owner;
+                                    //comment.date = new Date(comments[j].date).toLocaleString();
+                                    comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
+                                    images2[i].comments.push(comment);
                                 }
                             }
                         }
@@ -59,7 +64,7 @@ module.exports = function (io) {
                 let comment = new Comment({
                     text: req.body.comment,
                     owner: req.session.user.username,
-                    date: Date.now().slice(1, 8),
+                    date: Date.now(),
                     imageId: req.body.imageId
                 });
                 console.log(comment);
