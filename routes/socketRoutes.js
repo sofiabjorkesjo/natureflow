@@ -6,6 +6,72 @@ module.exports = function (io) {
     let User = require('../models/User');
     let Image = require('../models/Image');
     let Comment = require('../models/Comment');
+    let bcrypt = require('bcrypt-nodejs');
+
+
+    //hämtar startsidan
+
+    router.route('/')
+        .get(function (req, res) {
+            User.find({}, function (error, data) {
+                let context = {
+                    users: data.map(function (data) {
+                        return {
+                            username: data.username,
+                            password: data.password
+                        };
+                    })
+                };
+                Image.find({}, function (error, images) {
+                    let allImages = {
+                        imgs: images.map(function (images) {
+                            return {
+                                path: images.path,
+                                owner: images.owner,
+                                date: images.date,
+                                //imageId: images.imageId
+                            };
+                        })
+                    };
+                    console.log('hejhejkekeee');
+                    console.log(allImages);
+                    if (error) return console.log("error");
+                    io.emit('images', allImages);
+                    res.render('basic/index', {context, allImages});
+                })
+            });
+        })
+
+        // kollar om användaren finns registrerad
+        .post(function (req, res) {
+            let checkUser = User.find({'username': req.body.username});
+            checkUser.exec().then(function (data) {
+                bcrypt.compare(req.body.password, data[0].password, function (error, result) {
+                    if (result) {
+                        req.session.user = data[0];
+                        res.redirect('/images');
+                    } else {
+                        req.session.flash = {
+                            type: 'fail',
+                            message:'Wrong username or password.'
+                        };
+                        res.redirect('/');
+                    }
+                });
+            })
+                .catch(function (err) {
+                    if (err) {
+                        req.session.flash = {
+                            type: 'fail',
+                            message:'Wrong username or password.'
+                        };
+                        console.log(err);
+                        res.redirect('/');
+                    }
+                })
+        });
+
+
     //hittar och visar alla bilder
 
     router.route('/images')

@@ -1,5 +1,7 @@
 'use strict';
 
+let socket = io();
+
 let img = document.createElement('img');
 img.setAttribute('class', 'imgSlide');
 img.setAttribute('src', '/slideshow/1.jpg');
@@ -42,9 +44,9 @@ buttonRight.addEventListener('click', function () {
     plusDivs(1);
 });
 
-setInterval(function() {
-    plusDivs(1);
-}, 2000);
+// setInterval(function() {
+//     plusDivs(1);
+// }, 2000);
 
 //första bilden
 let slideIndex = 1;

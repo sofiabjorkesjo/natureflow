@@ -10,49 +10,6 @@ let Comment = require('../models/Comment');
 
 //hämtar startsidan & hittar alla användare som finns registrerade
 
-router.route('/')
-    .get(function (req, res) {
-        User.find({}, function (error, data) {
-            let context = {
-                users: data.map(function (data) {
-                    return {
-                        username: data.username,
-                        password: data.password
-                    };
-                })
-            };
-            res.render('basic/index', context);
-        });
-    })
-
-    // kollar om användaren finns registrerad
-    .post(function (req, res) {
-        let checkUser = User.find({'username': req.body.username});
-        checkUser.exec().then(function (data) {
-            bcrypt.compare(req.body.password, data[0].password, function (error, result) {
-                if (result) {
-                    req.session.user = data[0];
-                    res.redirect('/images');
-                } else {
-                    req.session.flash = {
-                        type: 'fail',
-                        message:'Wrong username or password.'
-                    };
-                    res.redirect('/');
-                }
-            });
-        })
-            .catch(function (err) {
-                if (err) {
-                    req.session.flash = {
-                        type: 'fail',
-                        message:'Wrong username or password.'
-                    };
-                    console.log(err);
-                    res.redirect('/');
-                }
-            })
-    });
 
 //hämtar sidan för att sign up
 //skapar en ny user, kollar om den finns, annars sparar den.
