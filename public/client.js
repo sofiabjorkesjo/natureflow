@@ -1,78 +1,109 @@
 'use strict';
 
-let socket = io();
+let socket2 = io();
 
-let img = document.createElement('img');
-img.setAttribute('class', 'imgSlide');
-img.setAttribute('src', '/slideshow/1.jpg');
-let img2 = document.createElement('img');
-img2.setAttribute('class', 'imgSlide');
-img2.setAttribute('src', '/slideshow/2.jpg');
-let img3 = document.createElement('img');
-img3.setAttribute('class', 'imgSlide');
-img3.setAttribute('src', '/slideshow/3.jpg');
+//hämtar alla bilder som finns uppladdade på databasen
 
-let buttonLeft = document.createElement('button');
-buttonLeft.setAttribute('class', 'button');
-buttonLeft.textContent = 'next';
-let buttonRight = document.createElement('button');
-buttonRight.setAttribute('class', 'button');
-buttonRight.textContent = 'next';
+socket2.on('images', function (allImages) {
 
-let buttonDiv = document.createElement('div');
-buttonDiv.setAttribute('id', 'buttonDiv');
-buttonDiv.appendChild(buttonLeft);
-buttonDiv.appendChild(buttonRight);
+    //sparar alla bilderna i en array
+
+    let imageArray = [];
+
+    for (let i = 0; i < allImages.imgs.length; i++) {
+        imageArray.push(allImages.imgs[i].path);
 
 
-let imgDiv = document.createElement('div');
-imgDiv.setAttribute('id', 'imgDiv');
+    }
 
-let wrapper = document.getElementById('wrapper');
-imgDiv.appendChild(img);
-imgDiv.appendChild(img2);
-imgDiv.appendChild(img3);
+    //shufflar arrayen med bilder o väljer alltid ut de fyra första.
 
-wrapper.appendChild(imgDiv);
-wrapper.appendChild(buttonDiv);
+    imageArray.sort(function () {
+        return 0.5 - Math.random()
+    });
 
-buttonLeft.addEventListener('click', function () {
-    plusDivs(-1);
-});
+    let img = document.createElement('img');
+    img.setAttribute('class', 'imgSlide');
+    img.setAttribute('src', '/images/' + imageArray[0]);
+    let img2 = document.createElement('img');
+    img2.setAttribute('class', 'imgSlide');
+    img2.setAttribute('src', '/images/' + imageArray[1]);
+    let img3 = document.createElement('img');
+    img3.setAttribute('class', 'imgSlide');
+    img3.setAttribute('src', '/images/' + imageArray[2]);
+    let img4 = document.createElement('img');
+    img3.setAttribute('class', 'imgSlide');
+    img3.setAttribute('src', '/images/' + imageArray[3]);
 
-buttonRight.addEventListener('click', function () {
-    plusDivs(1);
-});
+    let buttonLeft = document.createElement('button');
+    buttonLeft.setAttribute('class', 'button');
+    buttonLeft.textContent = 'next';
+    let buttonRight = document.createElement('button');
+    buttonRight.setAttribute('class', 'button');
+    buttonRight.textContent = 'next';
 
-// setInterval(function() {
-//     plusDivs(1);
-// }, 2000);
+    let buttonDiv = document.createElement('div');
+    buttonDiv.setAttribute('id', 'buttonDiv');
+    buttonDiv.appendChild(buttonLeft);
+    buttonDiv.appendChild(buttonRight);
+
+
+    let imgDiv = document.createElement('div');
+    imgDiv.setAttribute('id', 'imgDiv');
+
+    let wrapper = document.querySelector('#wrapper');
+    imgDiv.appendChild(img);
+    imgDiv.appendChild(img2);
+    imgDiv.appendChild(img3);
+    imgDiv.appendChild(img4);
+    wrapper.appendChild(imgDiv);
+    wrapper.appendChild(buttonDiv);
+
+    buttonLeft.addEventListener('click', function () {
+        plusDivs(-1);
+    });
+
+    buttonRight.addEventListener('click', function () {
+        plusDivs(1);
+    });
 
 //första bilden
-let slideIndex = 1;
-showDivs(slideIndex);
+    let slideIndex = 1;
+    showDivs(slideIndex);
 
 //hämtar nästa bild, antingen framåt eller bakåt beroende på vilken knapp man trycker på
-function plusDivs(n) {
-    showDivs(slideIndex += n);
-}
+    function plusDivs(n) {
+        slideIndex += n;
+        showDivs(slideIndex);
+    }
+
+    setInterval(function() {
+        plusDivs(1);
+    }, 1000);
+
+
 
 //gömmer alla bilderna och sätter display till block ovh visar en bild med det satta slideindex.
 //Om slideIndex är högre än numret av element så sätts de till noll.
 //Om slideIndex är mindre än 1 så sätts den till numret av element imgSlide.length.
 
-function showDivs(x) {
-    let i;
-    let imgSlide = document.getElementsByClassName('imgSlide')
-    if (x > imgSlide.length) {
-        slideIndex = 1;
-    }
-    if (x < 1) {
-        slideIndex = imgSlide.length;
+    function showDivs(x) {
+        let i;
+        let imgSlide = document.getElementsByClassName('imgSlide')
+        if (x > imgSlide.length) {
+            slideIndex = 1;
+        }
+        if (x < 1) {
+            slideIndex = imgSlide.length;
+        }
+
+        for (i = 0; i < imgSlide.length; i++) {
+            imgSlide[i].style.display = 'none';
+        }
+        imgSlide[slideIndex-1].style.display = 'block';
     }
 
-    for (i = 0; i < imgSlide.length; i++) {
-        imgSlide[i].style.display = 'none';
-    }
-    imgSlide[slideIndex-1].style.display = 'block';
-}
+
+
+
+});

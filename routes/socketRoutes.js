@@ -23,6 +23,7 @@ module.exports = function (io) {
                     })
                 };
                 Image.find({}, function (error, images) {
+                    if (error) return console.log("error");
                     let allImages = {
                         imgs: images.map(function (images) {
                             return {
@@ -33,10 +34,10 @@ module.exports = function (io) {
                             };
                         })
                     };
-                    console.log('hejhejkekeee');
-                    console.log(allImages);
-                    if (error) return console.log("error");
-                    io.emit('images', allImages);
+                    //funkade ej utan timeout
+                    setTimeout(function() {
+                        io.emit('images', allImages);
+                    }, 1000);
                     res.render('basic/index', {context, allImages});
                 })
             });
