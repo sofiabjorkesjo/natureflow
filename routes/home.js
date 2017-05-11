@@ -24,6 +24,7 @@ router.route('/sign-up')
             password: req.body.password
         });
 
+
         //hittar en användare
 
         User.findOne({username: req.body.username}).then(function (data) {
@@ -36,7 +37,17 @@ router.route('/sign-up')
             } else {
                 userObject.save()
                     .then(function () {
-                        res.redirect('/')
+                        let checkUser = User.find({'username': req.body.username});
+                        checkUser.exec().then(function (data) {
+                            bcrypt.compare(req.body.password, data[0].password, function (error, result) {
+                                if (result) {
+                                    req.session.user = data[0];
+                                    res.redirect('/images');
+                                } else {
+                                    res.redirect('/');
+                                }
+                            });
+                        })
                     })
                     .catch(function (err) {
                         if (err) {
@@ -85,7 +96,7 @@ router.route('/upload')
 
 
             if (image) {
-                if (req.files.imgFile.mimetype == 'image/jpeg') {
+                if (req.files.imgFile.mimetype == 'image/jpeg'||req.files.imgFile.mimetype == 'image/png' ) {
 
                     let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
                     image.mv('public/images/' + imageName, function (error) {

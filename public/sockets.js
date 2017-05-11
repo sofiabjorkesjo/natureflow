@@ -41,7 +41,7 @@ socket.on('comment', function (comment) {
             p2.textContent = 'hejehejhej';
             console.log(p2);
 
-            comment.date = new Date();
+            comment.date = new Date(comment.date);
             let dateText = document.createTextNode('Published ' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString());
 
             date.appendChild(dateText);

@@ -153,6 +153,15 @@ a {
     margin: 0 auto;
 }
 
+#uploadPicture {
+    display: none;
+}
+
+#uploadText {
+    font-family: Helvetica;
+    font-weight: 100;
+}
+
 .images {
     width: 350px;
     background-color: rgba(226, 226, 226, 0.22);
@@ -195,6 +204,12 @@ a {
     height: 50px;
     font-weight: 100;
     font-size: 20px;
+}
+
+.profileNoImages {
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 15px;
 }
 
 .deleteImage {

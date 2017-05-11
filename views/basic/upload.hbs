@@ -1,14 +1,17 @@
 
 <div id="uploadDiv">
-
+    <p id="uploadText">Upload your image here. The image must be type jpeg or png.</p>
     <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="button" value="Choose file..." id="upload">
         <input type="file" id="uploadPicture" name="imgFile">
         <input type="submit" id="upload" value="Upload" name="upload" >
     </form>
 
 </div>
+
+
 <div id="imageDiv"></div>
 
+<script src="upload.js"></script>
 
 
-<!--<script src="upload.js"></script>-->
