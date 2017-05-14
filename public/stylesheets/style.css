@@ -196,7 +196,12 @@ a {
 
 .fail {
     font-family: Helvetica;
-    color: darkred;
+    color: black;
+    text-align: center;
+    background-color: red;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
 }
 
 #usernameProfile {

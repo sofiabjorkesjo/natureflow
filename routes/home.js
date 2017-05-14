@@ -209,6 +209,11 @@ router.route('/profile')
         }
     });
 
+router.route('/search')
+    .get(function (req, res) {
+        res.render('basic/search')
+    });
+
 
 router.route('/403')
     .get(function (req, res) {

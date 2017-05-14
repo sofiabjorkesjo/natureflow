@@ -35,18 +35,6 @@ socket2.on('images', function (allImages) {
     img3.setAttribute('class', 'imgSlide');
     img3.setAttribute('src', '/images/' + imageArray[3]);
 
-    let buttonLeft = document.createElement('button');
-    buttonLeft.setAttribute('class', 'button');
-    buttonLeft.textContent = 'next';
-    let buttonRight = document.createElement('button');
-    buttonRight.setAttribute('class', 'button');
-    buttonRight.textContent = 'next';
-
-    let buttonDiv = document.createElement('div');
-    buttonDiv.setAttribute('id', 'buttonDiv');
-    buttonDiv.appendChild(buttonLeft);
-    buttonDiv.appendChild(buttonRight);
-
 
     let imgDiv = document.createElement('div');
     imgDiv.setAttribute('id', 'imgDiv');
@@ -57,15 +45,8 @@ socket2.on('images', function (allImages) {
     imgDiv.appendChild(img3);
     imgDiv.appendChild(img4);
     wrapper.appendChild(imgDiv);
-    wrapper.appendChild(buttonDiv);
 
-    buttonLeft.addEventListener('click', function () {
-        plusDivs(-1);
-    });
 
-    buttonRight.addEventListener('click', function () {
-        plusDivs(1);
-    });
 
 //första bilden
     let slideIndex = 1;
@@ -79,7 +60,7 @@ socket2.on('images', function (allImages) {
 
     setInterval(function() {
         plusDivs(1);
-    }, 1000);
+    }, 10000);
 
 
 
