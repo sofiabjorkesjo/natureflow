@@ -56,6 +56,75 @@ socket.on('comment', function (comment) {
     }
 });
 
+//hämtar bilderna i realtid
 
+socket.on('image', function (image) {
+    console.log(image.path);
+    let path = image.path;
+    let wrapper = document.querySelector('#wrapper');
+    let imageDiv = document.createElement('div');
+    imageDiv.setAttribute('class', 'images');
+    let p = document.createElement('p');
+    p.setAttribute('id', 'publishedBy');
+    p.textContent = 'Published by' + image.owner;
+    imageDiv.appendChild(p);
+    let imageDiv2 = document.createElement('div');
+    imageDiv2.setAttribute('class', 'imageDiv');
+    let link = document.createElement('img');
+    link.setAttribute('src', '/images/' + path);
+    let a = document.createElement('a');
+    a.setAttribute('href', '/images/' + path);
+    a.setAttribute('data-lightbox', 'image1');
+    a.appendChild(link);
+    imageDiv2.appendChild(a);
+    imageDiv.appendChild(imageDiv2);
+
+
+    let addComment = document.createElement('button');
+    addComment.setAttribute('class', 'addComment');
+    addComment.textContent = 'Add comment';
+    imageDiv.appendChild(addComment);
+    let comments = document.createElement('button');
+    comments.setAttribute('class', 'comments');
+    comments.textContent = 'Comments';
+    let span = document.createElement('span');
+    span.setAttribute('class', 'commentNumber');
+    span.textContent = '(' + comments.length +')';
+    comments.appendChild(span);
+    imageDiv.appendChild(comments);
+
+    wrapper.insertBefore(imageDiv, wrapper.childNodes[3]);
+
+    //skapar kommentarsfältet
+
+    let model = document.createElement('div');
+    //model.setAttribute('style', )
+    model.setAttribute('class', 'model');
+    let modelcontent = document.createElement('div');
+    modelcontent.setAttribute('class', 'modal-content');
+    let close = document.createElement('span');
+    close.setAttribute('class', 'close');
+    close.textContent = 'X';
+    modelcontent.appendChild(close);
+    let form = document.createElement('form');
+    form.setAttribute('action', '/images');
+    form.setAttribute('method', 'post');
+    let input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'imageId');
+    input.setAttribute('class', 'imageidtest');
+    input.setAttribute('value', image.imageId);
+    form.appendChild(input);
+    let textArea = document.createElement('textarea');
+    textArea.setAttribute('rows', '6');
+    textArea.setAttribute('cols', '50');
+    textArea.setAttribute('name', 'comment');
+    textArea.setAttribute()
+    model.appendChild(modelcontent);
+
+
+
+
+});
 
 

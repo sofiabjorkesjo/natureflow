@@ -158,6 +158,84 @@ module.exports = function (io) {
             }
         });
 
+    router.route('/upload')
+        .get(function (req, res) {
+            if (req.session.user) {
+                res.render('basic/upload');
+            } else {
+                res.redirect('/403');
+            }
+        })
+
+        //sparar bilden på servern och databasen när den laddas upp
+
+        .post(function (req, res) {
+            if (req.session.user) {
+                let image = req.files.imgFile;
+                // console.log('tetststsia');
+                // console.log(req.files.imgFile);
+                //console.log(req.files.imgFile.mimetype);
+
+                if (image) {
+                    if (req.files.imgFile.mimetype == 'image/jpeg'||req.files.imgFile.mimetype == 'image/png' ) {
+
+                        let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
+                        image.mv('public/images/' + imageName, function (error) {
+                            if (error) {
+
+                                console.log('error här');
+                                return console.log(error);
+                            }
+                            let image = new Image({
+                                path: imageName,
+                                owner: req.session.user.username,
+                                date: Date.now()
+                            });
+
+
+
+                            image.save(function (error) {
+                                if (error) return console.log("error :(");
+                                io.emit('image', image);
+                                res.redirect('/images');
+                            });
+
+
+                        })
+
+
+
+                    } else {
+                        //flash om de är nått annat än jpeg bild
+                        req.session.flash = {
+                            type: 'fail',
+                            message: 'Photo must be type image/jpeg'
+                        };
+                        console.log('must be jog ');
+                        res.redirect('/upload');
+                    }
+
+                } else {
+                    //flash om man försöker ladda upp en bild utan att ha valt en
+
+                    req.session.flash = {
+                        type: 'fail',
+                        message: 'You must select a photo to upload.'
+                    };
+                    console.log('feeel');
+                    res.redirect('/upload');
+                }
+
+
+
+
+            } else {
+                res.redirect('/403');
+            }
+        });
+
+
+
     return router;
 
 };
