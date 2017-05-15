@@ -59,7 +59,7 @@ socket.on('comment', function (comment) {
 //hämtar bilderna i realtid
 
 socket.on('image', function (image) {
-    console.log(image.path);
+    console.log(image);
     let path = image.path;
     let wrapper = document.querySelector('#wrapper');
     let imageDiv = document.createElement('div');
@@ -87,10 +87,10 @@ socket.on('image', function (image) {
     let comments = document.createElement('button');
     comments.setAttribute('class', 'comments');
     comments.textContent = 'Comments';
-    let span = document.createElement('span');
-    span.setAttribute('class', 'commentNumber');
-    span.textContent = '(' + comments.length +')';
-    comments.appendChild(span);
+    let span2 = document.createElement('span');
+    span2.setAttribute('class', 'commentNumber');
+    span2.textContent = '(' + '0' +')';
+    comments.appendChild(span2);
     imageDiv.appendChild(comments);
 
     wrapper.insertBefore(imageDiv, wrapper.childNodes[3]);
@@ -106,6 +106,9 @@ socket.on('image', function (image) {
     close.setAttribute('class', 'close');
     close.textContent = 'X';
     modelcontent.appendChild(close);
+    let pTag = document.createElement('p');
+    pTag.textContent = 'Write a comment here';
+    modelcontent.appendChild(pTag);
     let form = document.createElement('form');
     form.setAttribute('action', '/images');
     form.setAttribute('method', 'post');
@@ -113,16 +116,151 @@ socket.on('image', function (image) {
     input.setAttribute('type', 'hidden');
     input.setAttribute('name', 'imageId');
     input.setAttribute('class', 'imageidtest');
-    input.setAttribute('value', image.imageId);
+    input.setAttribute('value', image._id);
     form.appendChild(input);
     let textArea = document.createElement('textarea');
     textArea.setAttribute('rows', '6');
     textArea.setAttribute('cols', '50');
     textArea.setAttribute('name', 'comment');
-    textArea.setAttribute()
+    textArea.setAttribute('class', 'messageComment');
+    textArea.setAttribute('maxlength', '30');
+    form.appendChild(textArea);
+    let b = document.createElement('br');
+    form.appendChild(b);
+    let feedback = document.createElement('span');
+    feedback.setAttribute('class', 'feedback');
+    feedback.textContent = 'You have 30 charachters to write';
+    form.appendChild(feedback);
+    let submit = document.createElement('input');
+    submit.setAttribute('type', 'submit');
+    submit.setAttribute('value', 'Post Comment');
+    submit.setAttribute('class', 'postComment');
+    form.appendChild(submit);
+    modelcontent.appendChild(form);
     model.appendChild(modelcontent);
+    wrapper.appendChild(model);
 
 
+    //klicka upp
+
+    //let newImages = addComment.length;
+    //console.log(newImages);
+
+    addComment.addEventListener('click', function () {
+        console.log('hejhejhej');
+        console.log(model);
+        console.log(model.length);
+        model.style.display = 'block';
+    });
+
+    window.addEventListener('click', function () {
+        if (event.target === model) {
+            model.style.display = 'none';
+        }
+    });
+
+    close.addEventListener('click', function () {
+        model.style.display = 'none';
+    });
+
+
+
+                textArea.addEventListener('keyup', function () {
+                    console.log('ejjejejje');
+                    if(textArea.value.length > 30) {
+                        return false;
+                    }
+                    feedback.textContent = 'You have ' + (30-textArea.value.length) + ' charachters to write';
+                });
+
+
+
+//
+//     let modell = document.getElementsByClassName('model');
+//     let btn = document.querySelectorAll('.addComment');
+//     console.log(btn.length);
+//    // let span = document.getElementsByClassName('close');
+//
+//
+//
+//     let nrOfImages = btn.length;
+//
+//
+//     for (let i = 0; i < nrOfImages; i++) {
+//         btn[i].addEventListener('click', function () {
+//             modell[i].style.display = 'block';
+//             Clear();
+//         });
+//         close[i].addEventListener('click', function () {
+//             modell[i].style.display = 'none';
+//             Clear();
+//         });
+//     }
+//
+//     window.addEventListener('click', function () {
+//         for (let j = 0; j < nrOfImages; j++) {
+//             if (event.target === modell[j]) {
+//                 modell[j].style.display = 'none';
+//             }
+//         }
+//
+//     });
+//
+// //Klickar upp boxen för att skriva kommentar, och klicka ner boxen
+//
+//     let modellComments = document.getElementsByClassName('modelComments');
+//     let button = document.querySelectorAll('.comments');
+//     let closeButton = document.getElementsByClassName('closeComments');
+//
+//     for (let i = 0; i < button.length; i ++) {
+//         button[i].addEventListener('click', function () {
+//             modellComments[i].style.display = 'block';
+//         });
+//         closeButton[i].addEventListener('click', function () {
+//             modellComments[i].style.display = 'none';
+//
+//
+//         });
+//     }
+//
+//     window.addEventListener('click', function () {
+//         for (let i = 0; i < button.length; i++) {
+//             if (event.target === modellComments[i]) {
+//                 modellComments[i].style.display = 'none';
+//                 //  Clear();
+//             }
+//         }
+//     });
+//
+// //räknar ner antal tecken i en kommentat
+//
+//     let textarea = document.querySelectorAll('.messageComment');
+//     let feedback = document.querySelectorAll('.feedback');
+//     for(let i = 0; i < nrOfImages; i++) {
+//         for(let j = 0; j < textarea.length; j++) {
+//             for (let a = 0; a < feedback.length; a++) {
+//                 textarea[j].addEventListener('keyup', function () {
+//                     if(textarea[j].value.length > 30) {
+//                         return false;
+//                     }
+//                     feedback[a].textContent = 'You have ' + (30-textarea[j].value.length) + ' charachters to write';
+//                 });
+//             }
+//         }
+//     }
+//
+// //sätter kommentarsfältet till tomt och nedräkningen återställs
+//
+//     function Clear() {
+//         for(let i = 0; i < nrOfImages; i++) {
+//             for(let j = 0; j < textarea.length; j++) {
+//                 textarea[j].value = '';
+//                 for (let a = 0; a < feedback.length; a++) {
+//                     feedback[a].textContent =  'You have ' + (30-textarea[j].value.length) + ' charachters to write';
+//                 }
+//             }
+//         }
+//     }
 
 
 });
