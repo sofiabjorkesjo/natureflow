@@ -62,6 +62,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(function (req, res, next) {
+    res.status(404);
+    res.render('error/404');
+    next();
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).render('error/500');
+    next();
+});
 // exphbs.helpers()
 // Handlebars.helpers('splitDate', function (date) {
 //     let d = date.split('GMT+0200');

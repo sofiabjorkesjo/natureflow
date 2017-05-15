@@ -95,7 +95,9 @@ socket.on('image', function (image) {
 
     //let newImages = addComment.length;
     //console.log(newImages);
-
+    let test = document.querySelectorAll('.addComment');
+    console.log(test.length);
+    //FIXA DETTA
     addComment.addEventListener('click', function () {
         console.log('hejhejhej');
         console.log(model);
