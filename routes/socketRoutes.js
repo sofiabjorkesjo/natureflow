@@ -142,6 +142,8 @@ module.exports = function (io) {
 
                         res.redirect('/images');
                     })
+
+
                     .catch(function (err) {
                         if (err) {
                             console.log(err);
