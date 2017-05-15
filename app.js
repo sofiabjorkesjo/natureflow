@@ -62,17 +62,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(function (req, res, next) {
-    res.status(404);
-    res.render('error/404');
-    next();
-});
 
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).render('error/500');
-    next();
-});
+
+
 // exphbs.helpers()
 // Handlebars.helpers('splitDate', function (date) {
 //     let d = date.split('GMT+0200');
@@ -95,6 +87,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 //ansluter och avslutar anslutningen till sockets.
 //requirar socket
 
+//404 error handeling
+app.use(function (req, res, next) {
+    res.status(404);
+    res.render('error/404');
+    next();
+});
+
+//500 error handeling
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).render('error/500');
+    next();
+});
 
 io.on('connection', function (socket) {
     console.log("tesstttt");
