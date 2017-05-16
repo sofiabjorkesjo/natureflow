@@ -2,7 +2,7 @@
 
 let modell = document.getElementsByClassName('model');
 let btn = document.querySelectorAll('.addComment');
-console.log(btn.length);
+//console.log(btn.length);
 let span = document.getElementsByClassName('close');
 
 

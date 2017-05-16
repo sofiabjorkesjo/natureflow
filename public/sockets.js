@@ -39,11 +39,14 @@ socket.on('image', function (image) {
     imageDiv.appendChild(addComment);
     let comments = document.createElement('button');
     comments.setAttribute('class', 'comments');
-    comments.textContent = 'Comments';
+    comments.textContent = 'Comments (';
     let span2 = document.createElement('span');
     span2.setAttribute('class', 'commentsNumber');
-    span2.textContent = '(' + '0' +')';
+    span2.textContent = '0';
+    let parantes = document.createTextNode(')');
+
     comments.appendChild(span2);
+    comments.appendChild(parantes);
     imageDiv.appendChild(comments);
 
     wrapper.insertBefore(imageDiv, wrapper.childNodes[3]);
@@ -101,34 +104,47 @@ socket.on('image', function (image) {
     let test = document.querySelectorAll('.addComment');
     console.log(test.length);
 
-    let allAddComments = document.querySelectorAll('.addComment');
-    let allModels = document.querySelectorAll('.model');
-    let allClose = document.querySelectorAll('.close');
+    // let allAddComments = document.querySelectorAll('.addComment');
+    // let allModels = document.querySelectorAll('.model');
+    // let allClose = document.querySelectorAll('.close');
     //FIXA DETTA
 
     //add comment
+    //
+    // for (let i = 0; i < allAddComments.length; i++) {
+    //     allAddComments[i].addEventListener('click', function () {
+    //         console.log('hejhejhej');
+    //         console.log(model);
+    //         console.log(model.length);
+    //         allModels[i].style.display = 'block';
+    //     });
+    //     allClose[i].addEventListener('click', function () {
+    //         allModels[i].style.display = 'none';
+    //     });
+    // }
+    addComment.addEventListener('click', function () {
+        model.style.display = 'block';
+    });
 
-    for (let i = 0; i < allAddComments.length; i++) {
-        allAddComments[i].addEventListener('click', function () {
-            console.log('hejhejhej');
-            console.log(model);
-            console.log(model.length);
-            allModels[i].style.display = 'block';
-        });
-        allClose[i].addEventListener('click', function () {
-            allModels[i].style.display = 'none';
-        });
-    }
-
+    close.addEventListener('click', function () {
+        model.style.display = 'none';
+    });
 
     window.addEventListener('click', function () {
-        for (let j = 0; j < allAddComments.length; j++) {
-            if (event.target === allModels[j]) {
-                allModels[j].style.display = 'none';
-            }
+        if (event.target === model) {
+            model.style.display = 'none';
         }
-
     });
+
+
+    // window.addEventListener('click', function () {
+    //     for (let j = 0; j < allAddComments.length; j++) {
+    //         if (event.target === allModels[j]) {
+    //             allModels[j].style.display = 'none';
+    //         }
+    //     }
+    //
+    // });
 
 
 
@@ -181,26 +197,41 @@ socket.on('image', function (image) {
     wrapper.appendChild(modelComments);
 
     //comments read
-    let allCommentsButton = document.querySelectorAll('.comments');
-    let allModelComments = document.querySelectorAll('.modelComments');
-    let allSpanCLose = document.querySelectorAll('.closeComments');
+    // let allCommentsButton = document.querySelectorAll('.comments');
+    // let allModelComments = document.querySelectorAll('.modelComments');
+    // let allSpanCLose = document.querySelectorAll('.closeComments');
 
-    for (let i = 0; i < allCommentsButton.length; i++) {
-        allCommentsButton[i].addEventListener('click', function () {
-            allModelComments[i].style.display = 'block';
-        });
-        allSpanCLose[i].addEventListener('click', function () {
-            allModelComments[i].style.display = 'none';
-        });
-    }
-    for (let i = 0; i < allCommentsButton.length; i++) {
-        window.addEventListener('click', function () {
-            if (event.target === allModelComments[i]) {
-                allModelComments[i].style.display = 'none';
-            }
-        })
-    }
-});
+
+    comments.addEventListener('click', function () {
+        modelComments.style.display = 'block';
+    });
+
+    spanCLose.addEventListener('click', function () {
+        modelComments.style.display = 'none';
+    });
+
+    window.addEventListener('click', function () {
+        if (event.target === modelComments) {
+            modelComments.style.display = 'none';
+        }
+    });
+//
+//     for (let i = 0; i < allCommentsButton.length; i++) {
+//         allCommentsButton[i].addEventListener('click', function () {
+//             allModelComments[i].style.display = 'block';
+//         });
+//         allSpanCLose[i].addEventListener('click', function () {
+//             allModelComments[i].style.display = 'none';
+//         });
+//     }
+//     for (let i = 0; i < allCommentsButton.length; i++) {
+//         window.addEventListener('click', function () {
+//             if (event.target === allModelComments[i]) {
+//                 allModelComments[i].style.display = 'none';
+//             }
+//         })
+//     }
+ });
 
 
 //skapar en ny kommentar med socket så att det uppdateras i realtid
@@ -215,9 +246,10 @@ socket.on('comment', function (comment) {
 
     //loopar igenom alla comments-content divar och väljer den som har samma id som kommentaren.
     //Då skapas en ny kommentar till den commments-content.
-            console.log('sjsjsj');
-    console.log(commentsContent.length);
+
+
     for (let i = 0; i < commentsContent.length; i++) {
+        console.log(commentsContent.length);
         if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
             let commentDiv = document.createElement("div");
             commentDiv.setAttribute("class", "commentsDiv");
@@ -238,11 +270,6 @@ socket.on('comment', function (comment) {
 
             //skapar datumet
 
-
-            let p2 = document.createElement('p');
-            p2.textContent = 'hejehejhej';
-            console.log(p2);
-
             comment.date = new Date(comment.date);
             let dateText = document.createTextNode('Published ' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString());
 
@@ -251,12 +278,33 @@ socket.on('comment', function (comment) {
             commentsContent[i].appendChild(commentDiv);
 
             //numret med antal bilder uppdateras
+            // console.log(images);
+            // console.log(images[i]);
+            // let commentNumber = images[i].querySelector('.commentsNumber');
+            // commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
+            // console.log('testtest');
+            // console.log(commentNumber);
+        }
+    }
+    console.log(images.length);
+    for (let i = 0; i < images.length; i++){
+        if (commentsContent[i].getAttribute("data-id") === comment.imageId)
 
-            let commentNumber = images[i].querySelector('.commentsNumber');
-            commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
+        {
+
+            console.log('aaaa');
+            console.log(commentsContent[i].getAttribute("data-id"));
+            console.log(comment.imageId);
+        //console.log(images[i]);
+        let commentNumber = images[i].querySelector('.commentsNumber');
+            console.log(images[i].querySelector('.commentsNumber'));
+            console.log(commentNumber);
+        commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
+            console.log(commentNumber);
+        //console.log('testtest');
+        //console.log(commentNumber);
         }
     }
 });
-
 
 
