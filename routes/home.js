@@ -51,6 +51,8 @@ router.route('/sign-up')
                     })
                     .catch(function (err) {
                         if (err) {
+                            console.log('error rrr rr rr r ');
+                            console.log(err);
                            req.session.flash = {
                                type: 'fail',
                                message: err.message + '. The password must be of minimum lenghh six charachters, and the username four charachters.'
@@ -137,7 +139,32 @@ router.route('/profile')
 
 router.route('/search')
     .get(function (req, res) {
-        res.render('basic/search')
+        res.render('basic/search');
+        // Image.find({}, function (error, images) {
+        //     if (error) return console.log("error");
+        //     let imagesSearch = {
+        //         imgs: images.map(function (images) {
+        //             console.log('sss');
+        //             console.log(images);
+        //             return {
+        //                 path: images.path,
+        //                 owner: images.owner,
+        //                 date: images.date,
+        //                 hashtags: images.hashtags
+        //             };
+        //         })
+        //     };
+        //     res.render('basic/search', imagesSearch );
+        // })
+
+    })
+    .post(function (req, res) {
+  Image.find({hashtags: req.body.search}).then(function (data) {
+      console.log('testaaaaaaaaar hashtags');
+      console.log(data);
+      res.redirect('/search');
+  })
+
     });
 
 
@@ -145,5 +172,12 @@ router.route('/403')
     .get(function (req, res) {
         res.render('error/403');
     });
+
+
+router.route('/test')
+    .get(function (req, res) {
+        res.render('basic/test')
+    });
+
 
 module.exports = router;

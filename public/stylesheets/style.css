@@ -157,11 +157,15 @@ a {
     display: none;
 }
 
-#uploadText {
+.uploadText {
     font-family: Helvetica;
     font-weight: 100;
 }
 
+#hashtags {
+    max-width: 300px;
+    max-height: 100px;
+}
 .images {
     width: 350px;
     background-color: rgba(226, 226, 226, 0.22);

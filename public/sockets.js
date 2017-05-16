@@ -287,13 +287,19 @@ socket.on('comment', function (comment) {
         }
     }
     console.log(images.length);
+    // med denna sätter den 1 på den längst ner på sidan som ej uppdaterats o ej den rätta bilden.
+    //måste hitta o koppla rätt id.
     for (let i = 0; i < images.length; i++){
-        if (commentsContent[i].getAttribute("data-id") === comment.imageId)
+        //med den sätter den 1 på alla
+       // for (let j = 0; j < commentsContent.length; j++) {
+
+
+        if (commentsContent.getAttribute("data-id") === comment.imageId)
 
         {
 
             console.log('aaaa');
-            console.log(commentsContent[i].getAttribute("data-id"));
+            console.log(commentsContent.getAttribute("data-id"));
             console.log(comment.imageId);
         //console.log(images[i]);
         let commentNumber = images[i].querySelector('.commentsNumber');
@@ -304,6 +310,7 @@ socket.on('comment', function (comment) {
         //console.log('testtest');
         //console.log(commentNumber);
         }
+        //}
     }
 });
 

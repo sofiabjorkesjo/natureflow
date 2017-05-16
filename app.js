@@ -91,14 +91,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
     res.status(404);
     res.render('error/404');
-    next();
+
 });
 
 //500 error handeling
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).render('error/500');
-    next();
+
 });
 
 io.on('connection', function (socket) {

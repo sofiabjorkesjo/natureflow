@@ -67,6 +67,7 @@ module.exports = function (io) {
                             message:'Wrong username or password.'
                         };
                         console.log(err);
+                        console.log('error error');
                         res.redirect('/');
                     }
                 })
@@ -191,7 +192,8 @@ module.exports = function (io) {
                             let image = new Image({
                                 path: imageName,
                                 owner: req.session.user.username,
-                                date: Date.now()
+                                date: Date.now(),
+                                hashtags: req.body.hashtags
                             });
 
 
