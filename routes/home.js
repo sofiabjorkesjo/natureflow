@@ -140,6 +140,24 @@ router.route('/profile')
 router.route('/search')
     .get(function (req, res) {
         res.render('basic/search');
+        // Image.find({hashtags: req.body.search}).then(function (data) {
+        //     if (data) {
+        //         res.render('basic/search', {images: data});
+        //     } else {
+        //         res.render(('basic/search'));
+        //     }
+        //     console.log('testaaaaaaaaar hashtags');
+        //     console.log(data);
+        //
+        // })
+
+
+
+        // Image.find({hashtags: req.body.search}).then(function (data) {
+        //     console.log('get');
+        //     console.log(data);
+        //     res.render('basic/search', data);
+        // });
         // Image.find({}, function (error, images) {
         //     if (error) return console.log("error");
         //     let imagesSearch = {
@@ -162,7 +180,7 @@ router.route('/search')
   Image.find({hashtags: req.body.search}).then(function (data) {
       console.log('testaaaaaaaaar hashtags');
       console.log(data);
-      res.redirect('/search');
+      res.render('basic/search', {images: data});
   })
 
     });
