@@ -137,6 +137,8 @@ router.route('/profile')
         }
     });
 
+// req.params.word
+
 router.route('/search')
     .get(function (req, res) {
         res.render('basic/search');
