@@ -177,15 +177,35 @@ router.route('/search')
         //     res.render('basic/search', imagesSearch );
         // })
 
-    })
-    .post(function (req, res) {
+    });
+  //   .post(function (req, res) {
+  //       if (req.session.user) {
+  //           // Image.find({owner: req.session.user.username}, function (error, data) {
+  //          if(req.body.search)
+  //           {
+  //
+  //
+  //
+  //
+  //           }else {
+  //           console.log('ghghhgghghhghg');
+  //           res.redirect('/search');
+  //       }
+  //       } else {
+  //           res.redirect('/403');
+  //       }
+  // // Image.find({hashtags: req.body.search}).then(function (data) {
+  // //     console.log('testaaaaaaaaar hashtags');
+  // //     console.log(data);
+  // //     res.render('basic/search', {images: data});
+  // // })
+  //
+  //   });
+
+router.route('/search/:word')
+    .get(function (req, res) {
         if (req.session.user) {
-            // Image.find({owner: req.session.user.username}, function (error, data) {
-            if(req.body.search)
-            {
-
-
-            Image.find({hashtags: req.body.search}, function Test (error, images) {
+            Image.find({hashtags: req.params.word}, function (error, images) {
                 // console.log(images);
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
@@ -218,24 +238,42 @@ router.route('/search')
                         }
                     }
 
-                    res.render('basic/search', {images: images2});
+                    res.render('basic/search', {images: images2, word: req.params.word});
                 });
             })
-
-            }else {
-                console.log('ghghhgghghhghg');
-                res.redirect('/search');
-            }
-        } else {
-            res.redirect('/403');
         }
-  // Image.find({hashtags: req.body.search}).then(function (data) {
-  //     console.log('testaaaaaaaaar hashtags');
-  //     console.log(data);
-  //     res.render('basic/search', {images: data});
-  // })
+    })
+    .post(function (req, res) {
+        let comment = new Comment({
+            text: req.body.comment,
+            owner: req.session.user.username,
+            date: Date.now(),
+            imageId: req.body.imageId
+        });
+        console.log(comment);
 
-    });
+        comment.save()
+            .then(function () {
+                io.emit("comment", comment);
+
+                res.redirect('/search');
+            })
+
+
+            .catch(function (err) {
+                if (err) {
+                    console.log(err);
+                    console.log('error comments');
+                    req.session.flash = {
+                        type: 'fail',
+                        message: err.message + ' The comment must be max 30 characters and minumum 1 charachters'
+                    };
+                    res.redirect('/search');
+                }
+                res.redirect('/search');
+
+            })
+    })
 
 
 router.route('/403')

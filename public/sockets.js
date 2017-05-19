@@ -94,7 +94,8 @@ socket.on('image', function (image) {
     form.appendChild(submit);
     modelcontent.appendChild(form);
     model.appendChild(modelcontent);
-    wrapper.appendChild(model);
+    wrapper.insertBefore(model, wrapper.childNodes[3]);
+
 
 
     //klicka upp
@@ -194,7 +195,8 @@ socket.on('image', function (image) {
     // commentsDiv.appendChild(date);
     // modelCommentsContent.appendChild(commentsDiv);
     modelComments.appendChild(modelCommentsContent);
-    wrapper.appendChild(modelComments);
+    wrapper.insertBefore(modelComments, wrapper.childNodes[3]);
+
 
     //comments read
     // let allCommentsButton = document.querySelectorAll('.comments');
@@ -236,13 +238,12 @@ socket.on('image', function (image) {
 
 //skapar en ny kommentar med socket så att det uppdateras i realtid
 socket.on('comment', function (comment) {
-   console.log(comment);
-    console.log(comment.imageId);
+
 
     let commentsContent = document.querySelectorAll('.modelComments-content');
     let images = document.querySelectorAll('.images');
     console.log('sjjsjsaaaaaaa');
-    console.log(images.length);
+    console.log(images);
 
     //loopar igenom alla comments-content divar och väljer den som har samma id som kommentaren.
     //Då skapas en ny kommentar till den commments-content.
@@ -292,21 +293,11 @@ socket.on('comment', function (comment) {
     for (let i = 0; i < images.length; i++){
         //med den sätter den 1 på alla
        // for (let j = 0; j < commentsContent.length; j++) {
-
-
-        if (commentsContent.getAttribute("data-id") === comment.imageId)
-
-        {
-
-            console.log('aaaa');
-            console.log(commentsContent.getAttribute("data-id"));
-            console.log(comment.imageId);
+        if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
         //console.log(images[i]);
         let commentNumber = images[i].querySelector('.commentsNumber');
-            console.log(images[i].querySelector('.commentsNumber'));
-            console.log(commentNumber);
         commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
-            console.log(commentNumber);
+
         //console.log('testtest');
         //console.log(commentNumber);
         }
