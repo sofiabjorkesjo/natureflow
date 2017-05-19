@@ -140,8 +140,13 @@ router.route('/profile')
 // req.params.word
 
 router.route('/search')
+
     .get(function (req, res) {
-        res.render('basic/search');
+        if (req.session.user) {
+            res.render('basic/search');
+        } else {
+            res.redirect('/403');
+        }
 
     })
     .post(function(req, res) {
@@ -198,6 +203,8 @@ router.route('/search/:word')
                     res.render('basic/search', {images: images2, word: req.params.word});
                 });
             })
+        } else {
+            res.redirect('/403');
         }
     });
 

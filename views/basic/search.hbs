@@ -1,9 +1,11 @@
+<div id="searchDiv">
+
 <p class="uploadText"> Write in a hashtag to search for images that match.</p>
 <form action="/search" method="post">
     <input type="search" name="search" id="search">
     <input type="submit" name="searchButton" id="searchButton" value="Search">
 </form>
-
+</div>
 {{#if images}}
     {{#each images}}
         <div class="images">
@@ -11,7 +13,9 @@
             <div class="imageDiv">
                 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             </div>
+
         </div>
+
 
     {{/each}}
 

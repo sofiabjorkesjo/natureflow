@@ -169,7 +169,8 @@ a {
 .images {
     width: 350px;
     background-color: rgba(226, 226, 226, 0.22);
-    margin: auto 10px 15px;
+    margin-right: 20px;
+    margin-top: 20px;
     padding-top: 10px;
     display: inline-block;
     padding-bottom: 8px;
@@ -365,4 +366,9 @@ a {
     font-family: Helvetica;
     font-weight: 100;
     font-size: 14px;
+}
+
+#searchDiv form {
+    margin-bottom: 30px;
+    background-color: aqua;
 }
