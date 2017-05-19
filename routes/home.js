@@ -179,11 +179,61 @@ router.route('/search')
 
     })
     .post(function (req, res) {
-  Image.find({hashtags: req.body.search}).then(function (data) {
-      console.log('testaaaaaaaaar hashtags');
-      console.log(data);
-      res.render('basic/search', {images: data});
-  })
+        if (req.session.user) {
+            // Image.find({owner: req.session.user.username}, function (error, data) {
+            if(req.body.search)
+            {
+
+
+            Image.find({hashtags: req.body.search}, function Test (error, images) {
+                // console.log(images);
+                if (error) return console.log("error");
+                images.sort(function (a, b) {
+                    return b.date - a.date;
+                });
+
+                Comment.find({}, function(error, comments) {
+                    let images2 = [];
+                    for (let i = 0; i < images.length; i++) {
+                        images2[i] = {};
+                        images2[i].path = images[i].path;
+                        images2[i].owner = images[i].owner;
+                        images2[i].date = images[i].date;
+
+                        images2[i].id = images[i]._id;
+
+                        images2[i].comments = [];
+                        // Add comments
+                        // console.log(comments);
+                        for (let j = 0; j < comments.length; j++) {
+                            if (images[i]._id == comments[j].imageId) {
+                                // console.log("comment!");
+                                let comment = {};
+                                comment.text = comments[j].text;
+                                comment.owner = comments[j].owner;
+                                //comment.date = new Date(comments[j].date).toLocaleString();
+                                comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
+                                images2[i].comments.push(comment);
+                            }
+                        }
+                    }
+
+                    res.render('basic/search', {images: images2});
+                });
+            })
+
+            }else {
+                console.log('ghghhgghghhghg');
+                res.redirect('/search');
+            }
+        } else {
+            res.redirect('/403');
+        }
+  // Image.find({hashtags: req.body.search}).then(function (data) {
+  //     console.log('testaaaaaaaaar hashtags');
+  //     console.log(data);
+  //     res.render('basic/search', {images: data});
+  // })
 
     });
 

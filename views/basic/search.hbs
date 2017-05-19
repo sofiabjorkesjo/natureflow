@@ -19,7 +19,7 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <p>Write a comment here</p>
-                <form action="/images" method="post">
+                <form action="/search" method="post">
                     <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
                     <textarea rows="6" cols="50" name="comment" class="messageComment" maxlength="30"></textarea>
                     <br>
@@ -48,8 +48,6 @@
         </div>
 
     {{/each}}
-    {{else}}
-    <p>hejhej</p>
 
     {{/if}}
 
