@@ -142,65 +142,17 @@ router.route('/profile')
 router.route('/search')
     .get(function (req, res) {
         res.render('basic/search');
-        // Image.find({hashtags: req.body.search}).then(function (data) {
-        //     if (data) {
-        //         res.render('basic/search', {images: data});
-        //     } else {
-        //         res.render(('basic/search'));
-        //     }
-        //     console.log('testaaaaaaaaar hashtags');
-        //     console.log(data);
-        //
-        // })
 
+    })
+    .post(function(req, res) {
+        let word = req.body.search;
 
-
-        // Image.find({hashtags: req.body.search}).then(function (data) {
-        //     console.log('get');
-        //     console.log(data);
-        //     res.render('basic/search', data);
-        // });
-        // Image.find({}, function (error, images) {
-        //     if (error) return console.log("error");
-        //     let imagesSearch = {
-        //         imgs: images.map(function (images) {
-        //             console.log('sss');
-        //             console.log(images);
-        //             return {
-        //                 path: images.path,
-        //                 owner: images.owner,
-        //                 date: images.date,
-        //                 hashtags: images.hashtags
-        //             };
-        //         })
-        //     };
-        //     res.render('basic/search', imagesSearch );
-        // })
-
+        if (word) {
+            res.redirect('/search/' + word);
+        } else {
+            res.redirect('/search');
+        }
     });
-  //   .post(function (req, res) {
-  //       if (req.session.user) {
-  //           // Image.find({owner: req.session.user.username}, function (error, data) {
-  //          if(req.body.search)
-  //           {
-  //
-  //
-  //
-  //
-  //           }else {
-  //           console.log('ghghhgghghhghg');
-  //           res.redirect('/search');
-  //       }
-  //       } else {
-  //           res.redirect('/403');
-  //       }
-  // // Image.find({hashtags: req.body.search}).then(function (data) {
-  // //     console.log('testaaaaaaaaar hashtags');
-  // //     console.log(data);
-  // //     res.render('basic/search', {images: data});
-  // // })
-  //
-  //   });
 
 router.route('/search/:word')
     .get(function (req, res) {
@@ -238,42 +190,16 @@ router.route('/search/:word')
                         }
                     }
 
+                    if (images2.length === 0){
+                        console.log('inga bilder')
+                        return res.redirect('/search');
+                    }
+
                     res.render('basic/search', {images: images2, word: req.params.word});
                 });
             })
         }
-    })
-    .post(function (req, res) {
-        let comment = new Comment({
-            text: req.body.comment,
-            owner: req.session.user.username,
-            date: Date.now(),
-            imageId: req.body.imageId
-        });
-        console.log(comment);
-
-        comment.save()
-            .then(function () {
-                io.emit("comment", comment);
-
-                res.redirect('/search');
-            })
-
-
-            .catch(function (err) {
-                if (err) {
-                    console.log(err);
-                    console.log('error comments');
-                    req.session.flash = {
-                        type: 'fail',
-                        message: err.message + ' The comment must be max 30 characters and minumum 1 charachters'
-                    };
-                    res.redirect('/search');
-                }
-                res.redirect('/search');
-
-            })
-    })
+    });
 
 
 router.route('/403')
