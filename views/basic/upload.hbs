@@ -1,4 +1,4 @@
-
+{{>flash}}
 <div id="uploadDiv">
     <p class="uploadText">Upload your image here. The image must be type jpeg or png.</p>
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -6,7 +6,8 @@
         <input type="file" id="uploadPicture" name="imgFile">
         <input type="submit" id="upload" value="Upload" name="upload" >
         <p class="uploadText">Write some hashtags to describe your image</p>
-        <textarea id="hashtags" rows="3"  cols="50" name="hashtags"></textarea>
+        <input id="hashtags" name="hashtags">
+
     </form>
 
 </div>

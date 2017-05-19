@@ -151,7 +151,7 @@ module.exports = function (io) {
                             console.log('error comments');
                             req.session.flash = {
                                 type: 'fail',
-                                message: err.message + ' The comment must be max 30 characters and minumum 1 charachters'
+                                message: ' The comment must be max 30 characters and minumum 1 charachters'
                             };
                             res.redirect('/images');
                         }

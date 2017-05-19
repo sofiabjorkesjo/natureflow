@@ -118,16 +118,12 @@ router.route('/profile')
     })
 
     .post(function (req, res) {
-        console.log('hej');
-       console.log(req.body.inputDelete);
-
         if (req.session.user) {
             Image.findOneAndRemove({_id: req.body.inputDelete}, function (err) {
                // console.log(req.params.imageId);
                 console.log('tjo');
                 if (err) {
-                    console.log('funkar ej remove');
-
+                    console.log(err);
                 }
 
                 res.redirect('/profile');
@@ -140,7 +136,6 @@ router.route('/profile')
 // req.params.word
 
 router.route('/search')
-
     .get(function (req, res) {
         if (req.session.user) {
             res.render('basic/search');
@@ -151,11 +146,15 @@ router.route('/search')
     })
     .post(function(req, res) {
         let word = req.body.search;
-
         if (word) {
             res.redirect('/search/' + word);
         } else {
+            req.session.flash = {
+                type: 'fail',
+                message: 'You must write a word in the box'
+            };
             res.redirect('/search');
+
         }
     });
 
@@ -163,7 +162,6 @@ router.route('/search/:word')
     .get(function (req, res) {
         if (req.session.user) {
             Image.find({hashtags: req.params.word}, function (error, images) {
-                // console.log(images);
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
                     return b.date - a.date;
@@ -196,7 +194,10 @@ router.route('/search/:word')
                     }
 
                     if (images2.length === 0){
-                        console.log('inga bilder')
+                        req.session.flash = {
+                            type: 'fail',
+                            message: 'There are no matching images'
+                        };
                         return res.redirect('/search');
                     }
 
