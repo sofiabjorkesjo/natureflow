@@ -141,12 +141,44 @@ router.route('/profile/:user')
          //console.log(User);
             User.find({username: req.params.user}, function (error, data) {
 
+
                 console.log(data);
+
+                Image.find({}, function (error, images) {
+                    if (error) return console.log('error');
+                    images.sort(function (a, b) {
+                        return b.date - a.date;
+                    });
+                    Comment.find({}, function(error, comments) {
+                        let images2 = [];
+                        for (let i = 0; i < images.length; i++) {
+                            images2[i] = {};
+                            images2[i].path = images[i].path;
+                            images2[i].owner = images[i].owner;
+                            images2[i].date = images[i].date;
+                            images2[i].ownerId = images[i].ownerId;
+
+                            images2[i].id = images[i]._id;
+
+                            images2[i].comments = [];
+                            // Add comments
+                            // console.log(comments);
+                            for (let j = 0; j < comments.length; j++) {
+                                if (images[i]._id == comments[j].imageId) {
+                                    //console.log("comment!");
+                                    images2[i].comments.push(comments[j]);
+                                }
+                            }
+                        }
+
+                        res.render('basic/profile', {images: images2});
+                    });
+                })
 
             });
            // let user = req.session.user;
           //Image.find({})
-            res.render('basic/profile')
+
         }
 
     });
