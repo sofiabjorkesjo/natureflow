@@ -7,7 +7,8 @@ let imageSchema = new mongoose.Schema({
     owner: {type: String},
     date: {type: Date, default: Date.now},
     imageId: {type: String},
-    hashtags: {type: String}
+    hashtags: {type: String},
+    ownerId: {type: String}
 });
 
 let Image = mongoose.model('Image', imageSchema);

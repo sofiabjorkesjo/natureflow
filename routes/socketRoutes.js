@@ -193,7 +193,8 @@ module.exports = function (io) {
                                 path: imageName,
                                 owner: req.session.user.username,
                                 date: Date.now(),
-                                hashtags: req.body.hashtags
+                                hashtags: req.body.hashtags,
+                                ownerId: req.session.user._id
                             });
 
 

@@ -37,6 +37,7 @@ router.route('/sign-up')
             } else {
                 userObject.save()
                     .then(function () {
+                        console.log(User);
                         let checkUser = User.find({'username': req.body.username});
                         checkUser.exec().then(function (data) {
                             bcrypt.compare(req.body.password, data[0].password, function (error, result) {
@@ -95,6 +96,7 @@ router.route('/profile')
                          images2[i].path = images[i].path;
                          images2[i].owner = images[i].owner;
                          images2[i].date = images[i].date;
+                         images2[i].ownerId = images[i].ownerId;
 
                          images2[i].id = images[i]._id;
 
@@ -133,6 +135,22 @@ router.route('/profile')
         }
     });
 
+router.route('/profile/:user')
+    .get(function (req, res) {
+        if (req.session.user) {
+         //console.log(User);
+            User.find({username: req.params.user}, function (error, data) {
+
+                console.log(data);
+
+            });
+           // let user = req.session.user;
+          //Image.find({})
+            res.render('basic/profile')
+        }
+
+    });
+
 // req.params.word
 
 router.route('/search')
@@ -146,8 +164,12 @@ router.route('/search')
     })
     .post(function(req, res) {
         let word = req.body.search;
+        let user = req.body.searchUser;
+
         if (word) {
             res.redirect('/search/' + word);
+        } else if (user){
+            res.redirect('/profile/' + user);
         } else {
             req.session.flash = {
                 type: 'fail',
@@ -161,6 +183,8 @@ router.route('/search')
 router.route('/search/:word')
     .get(function (req, res) {
         if (req.session.user) {
+            console.log('aaaaaaaaaaaaaa');
+            console.log(req.params.word);
             Image.find({hashtags: req.params.word}, function (error, images) {
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
@@ -209,17 +233,65 @@ router.route('/search/:word')
         }
     });
 
+router.route('/search/:user')
+    .get(function (req, res) {
+        // if (req.session.user) {
+        //     Image.find({hashtags: req.params.word}, function (error, images) {
+        //         if (error) return console.log("error");
+        //         images.sort(function (a, b) {
+        //             return b.date - a.date;
+        //         });
+        //
+        //         Comment.find({}, function(error, comments) {
+        //             let images2 = [];
+        //             for (let i = 0; i < images.length; i++) {
+        //                 images2[i] = {};
+        //                 images2[i].path = images[i].path;
+        //                 images2[i].owner = images[i].owner;
+        //                 images2[i].date = images[i].date;
+        //
+        //                 images2[i].id = images[i]._id;
+        //
+        //                 images2[i].comments = [];
+        //                 // Add comments
+        //                 // console.log(comments);
+        //                 for (let j = 0; j < comments.length; j++) {
+        //                     if (images[i]._id == comments[j].imageId) {
+        //                         // console.log("comment!");
+        //                         let comment = {};
+        //                         comment.text = comments[j].text;
+        //                         comment.owner = comments[j].owner;
+        //                         //comment.date = new Date(comments[j].date).toLocaleString();
+        //                         comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
+        //                         images2[i].comments.push(comment);
+        //                     }
+        //                 }
+        //             }
+        //
+        //             if (images2.length === 0){
+        //                 req.session.flash = {
+        //                     type: 'fail',
+        //                     message: 'There are no matching images'
+        //                 };
+        //                 return res.redirect('/search');
+        //             }
+        //
+        //             res.render('basic/search', {images: images2, user: req.params.user});
+        //         });
+        //     })
+        // } else {
+        //     res.redirect('/403');
+        // }
+    });
+
+
+
 
 router.route('/403')
     .get(function (req, res) {
         res.render('error/403');
     });
 
-
-router.route('/test')
-    .get(function (req, res) {
-        res.render('basic/test')
-    });
 
 
 module.exports = router;
