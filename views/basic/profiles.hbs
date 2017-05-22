@@ -1,7 +1,7 @@
 
 
 <div id="usernameProfile">
-    This is profile and images belongs to <span class="user">{{data}}</span>.
+    This profile and images belongs to <span class="user">{{data}}</span>.
 </div>
 
 {{#if images}}
@@ -14,8 +14,7 @@
             <div class="imageDiv">
                 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             </div>
-
-            <button class="comments">Comments</button>
+            <button class="comments">Comments (<span class="commentNumber">{{comments.length}})</span></button>
         </div>
 
 

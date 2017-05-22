@@ -19,9 +19,24 @@
             <div class="imageDiv">
                 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             </div>
-
+            <button class="comments">Comments (<span class="commentNumber">{{comments.length}})</span></button>
         </div>
 
+        <div class="modelComments">
+            <div class="modelComments-content">
+
+                <span class="closeComments">x</span>
+                <div class="CommentsDiv">
+                    <h2>Comments</h2>
+                </div>
+                {{#each this.comments}}
+                    <div class="commentsDiv">
+                        <p><span class="ownerComment">{{this.owner}}</span> "{{this.text}}"</p>
+                        <p class="date">Published {{this.date}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
 
     {{/each}}
 
