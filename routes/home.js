@@ -82,7 +82,6 @@ router.route('/logged-out')
 
 router.route('/profile')
     .get(function (req, res) {
-
         if(req.session.user) {
              Image.find({owner: req.session.user.username}, function (error, images) {
                 if (error) return console.log('error');
@@ -110,7 +109,6 @@ router.route('/profile')
                              }
                          }
                      }
-
                      res.render('basic/profile', {images: images2});
                  });
              })
@@ -139,12 +137,14 @@ router.route('/profile/:user')
     .get(function (req, res) {
         if (req.session.user) {
          //console.log(User);
-            User.find({username: req.params.user}, function (error, data) {
+            User.findOne({username: req.params.user}, function (error, data) {
+
+                console.log('ssksöaskas');
+                if (data) {
 
 
-                console.log(data);
 
-                Image.find({}, function (error, images) {
+                Image.find({ownerId: data._id}, function (error, images) {
                     if (error) return console.log('error');
                     images.sort(function (a, b) {
                         return b.date - a.date;
@@ -170,15 +170,18 @@ router.route('/profile/:user')
                                 }
                             }
                         }
-
-                        res.render('basic/profile', {images: images2});
+                        res.render('basic/profile', {images: images2, user: req.params.user});
                     });
                 })
-
+                } else {
+                     return res.render('basic/profile');
+                }
             });
            // let user = req.session.user;
           //Image.find({})
 
+        } else {
+            res.redirect('/403');
         }
 
     });
@@ -195,7 +198,7 @@ router.route('/search')
 
     })
     .post(function(req, res) {
-        let word = req.body.search;
+        let word = req.body.searchWord;
         let user = req.body.searchUser;
 
         if (word) {
@@ -256,7 +259,6 @@ router.route('/search/:word')
                         };
                         return res.redirect('/search');
                     }
-
                     res.render('basic/search', {images: images2, word: req.params.word});
                 });
             })
@@ -264,59 +266,6 @@ router.route('/search/:word')
             res.redirect('/403');
         }
     });
-
-router.route('/search/:user')
-    .get(function (req, res) {
-        // if (req.session.user) {
-        //     Image.find({hashtags: req.params.word}, function (error, images) {
-        //         if (error) return console.log("error");
-        //         images.sort(function (a, b) {
-        //             return b.date - a.date;
-        //         });
-        //
-        //         Comment.find({}, function(error, comments) {
-        //             let images2 = [];
-        //             for (let i = 0; i < images.length; i++) {
-        //                 images2[i] = {};
-        //                 images2[i].path = images[i].path;
-        //                 images2[i].owner = images[i].owner;
-        //                 images2[i].date = images[i].date;
-        //
-        //                 images2[i].id = images[i]._id;
-        //
-        //                 images2[i].comments = [];
-        //                 // Add comments
-        //                 // console.log(comments);
-        //                 for (let j = 0; j < comments.length; j++) {
-        //                     if (images[i]._id == comments[j].imageId) {
-        //                         // console.log("comment!");
-        //                         let comment = {};
-        //                         comment.text = comments[j].text;
-        //                         comment.owner = comments[j].owner;
-        //                         //comment.date = new Date(comments[j].date).toLocaleString();
-        //                         comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
-        //                         images2[i].comments.push(comment);
-        //                     }
-        //                 }
-        //             }
-        //
-        //             if (images2.length === 0){
-        //                 req.session.flash = {
-        //                     type: 'fail',
-        //                     message: 'There are no matching images'
-        //                 };
-        //                 return res.redirect('/search');
-        //             }
-        //
-        //             res.render('basic/search', {images: images2, user: req.params.user});
-        //         });
-        //     })
-        // } else {
-        //     res.redirect('/403');
-        // }
-    });
-
-
 
 
 router.route('/403')
