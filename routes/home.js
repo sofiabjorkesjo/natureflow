@@ -133,63 +133,10 @@ router.route('/profile')
         }
     });
 
-// router.route('/profile/:user')
-//     .get(function (req, res) {
-//         if (req.session.user) {
-//          //console.log(User);
-//             User.findOne({username: req.params.user}, function (error, data) {
-//
-//                 if (data) {
-//                 Image.find({ownerId: data._id}, function (error, images) {
-//                     if (error) return console.log('error');
-//                     images.sort(function (a, b) {
-//                         return b.date - a.date;
-//                     });
-//                     Comment.find({}, function(error, comments) {
-//                         let images2 = [];
-//                         for (let i = 0; i < images.length; i++) {
-//                             images2[i] = {};
-//                             images2[i].path = images[i].path;
-//                             images2[i].owner = images[i].owner;
-//                             images2[i].date = images[i].date;
-//                             images2[i].ownerId = images[i].ownerId;
-//
-//                             images2[i].id = images[i]._id;
-//
-//                             images2[i].comments = [];
-//                             // Add comments
-//                             // console.log(comments);
-//                             for (let j = 0; j < comments.length; j++) {
-//                                 if (images[i]._id == comments[j].imageId) {
-//                                     //console.log("comment!");
-//                                     images2[i].comments.push(comments[j]);
-//                                 }
-//                             }
-//                         }
-//                         res.render('basic/profile', {images: images2, user: req.params.user});
-//                     });
-//                 })
-//                 } else {
-//                      return res.render('basic/profile');
-//                 }
-//             });
-//            // let user = req.session.user;
-//           //Image.find({})
-//
-//         } else {
-//             res.redirect('/403');
-//         }
-//
-//     });
 router.route('/profiles/:user')
     .get(function (req, res) {
         if (req.session.user) {
-            console.log('test user profil');
-            let test = req.session.user;
-            console.log(test);
             User.findOne({username: req.params.user}, function (error, data) {
-                console.log('sssssss');
-                console.log(req.params.user);
                 if (data) {
                     Image.find({ownerId: data._id}, function (error, images) {
                         if (error) return console.log('error');
@@ -218,25 +165,21 @@ router.route('/profiles/:user')
                                 }
                             }
                             res.render('basic/profiles', {images: images2, data: req.params.user});
-                            console.log(data);
-                            console.log('aaaaasadaffsfmgmg');
-
                         });
                     })
                 } else {
-                    return res.render('basic/profile');
+                    req.session.flash = {
+                        type: 'fail',
+                        message: 'Sorry, the user does not exist.'
+                    };
+                    res.redirect('/search');
                 }
             });
-            // let user = req.session.user;
-            //Image.find({})
 
         } else {
             res.redirect('/403');
         }
-
     });
-
-// req.params.word
 
 router.route('/search')
     .get(function (req, res) {

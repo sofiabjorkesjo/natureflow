@@ -1,5 +1,6 @@
 'use strict';
 
+
 let modell = document.getElementsByClassName('model');
 let btn = document.querySelectorAll('.addComment');
 //console.log(btn.length);
