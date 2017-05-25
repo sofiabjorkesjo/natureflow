@@ -5,18 +5,20 @@
 
 let socket = io();
 
-//hämtar bilderna i realtid
+//hämtar bilderna i realtidif
+
+let spanData = document.getElementsByClassName('user');
 
 socket.on('image', function (image) {
+    console.log('testaaaaaaaaaa');
+    console.log(spanData[1].textContent);
+    if (image.owner === spanData[1].textContent) {
+
     console.log(image);
     let path = image.path;
     let wrapper = document.querySelector('#wrapper');
     let imageDiv = document.createElement('div');
     imageDiv.setAttribute('class', 'images');
-    let p = document.createElement('p');
-    p.setAttribute('id', 'publishedBy');
-    p.textContent = 'Published by' + image.owner;
-    imageDiv.appendChild(p);
     let imageDiv2 = document.createElement('div');
     imageDiv2.setAttribute('class', 'imageDiv');
     let link = document.createElement('img');
@@ -29,10 +31,7 @@ socket.on('image', function (image) {
     imageDiv.appendChild(imageDiv2);
 
 
-    let addComment = document.createElement('button');
-    addComment.setAttribute('class', 'addComment');
-    addComment.textContent = 'Add comment';
-    imageDiv.appendChild(addComment);
+
     let comments = document.createElement('button');
     comments.setAttribute('class', 'comments');
     comments.textContent = 'Comments (';
@@ -45,7 +44,7 @@ socket.on('image', function (image) {
     comments.appendChild(parantes);
     imageDiv.appendChild(comments);
 
-    wrapper.insertBefore(imageDiv, wrapper.childNodes[3]);
+    wrapper.insertBefore(imageDiv, wrapper.childNodes[4]);
 
     //skapar kommentarsfältet
 
@@ -229,7 +228,9 @@ socket.on('image', function (image) {
 //             }
 //         })
 //     }
- });
+   };
+
+});
 
 
 //skapar en ny kommentar med socket så att det uppdateras i realtid
@@ -288,17 +289,17 @@ socket.on('comment', function (comment) {
     //måste hitta o koppla rätt id.
     for (let i = 0; i < images.length; i++){
         //med den sätter den 1 på alla
-       // for (let j = 0; j < commentsContent.length; j++) {
+        // for (let j = 0; j < commentsContent.length; j++) {
         if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
-        //console.log(images[i]);
-        let commentNumber = images[i].querySelector('.commentsNumber');
-        commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
+            //console.log(images[i]);
+            let commentNumber = images[i].querySelector('.commentsNumber');
+            commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
 
-        //console.log('testtest');
-        //console.log(commentNumber);
+            //console.log('testtest');
+            //console.log(commentNumber);
         }
         //}
     }
-});
 
+});
 
