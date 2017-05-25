@@ -39,6 +39,14 @@ header a {
     width:50%;
 }
 
+.here {
+    font-weight: bold;
+}
+
+.here:hover {
+    font-weight: bold;
+}
+
 .user {
     font-weight: 400;
 }
@@ -114,10 +122,14 @@ li a {
     font-weight: 100;
 }
 
-#start {
+.start {
     font-family: Helvetica;
     font-weight: 100;
     font-size: 16px;
+}
+
+.start:hover {
+    font-size: 18px;
 }
 
 #start a {
