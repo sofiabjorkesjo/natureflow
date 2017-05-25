@@ -31,7 +31,6 @@ socket.on('image', function (image) {
     imageDiv.appendChild(imageDiv2);
 
 
-
     let comments = document.createElement('button');
     comments.setAttribute('class', 'comments');
     comments.textContent = 'Comments (';
@@ -118,9 +117,7 @@ socket.on('image', function (image) {
     //         allModels[i].style.display = 'none';
     //     });
     // }
-    addComment.addEventListener('click', function () {
-        model.style.display = 'block';
-    });
+
 
     close.addEventListener('click', function () {
         model.style.display = 'none';
