@@ -14,26 +14,12 @@
             <div class="imageDiv">
                 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             </div>
-            <button class="addComment">Add comment</button>
+
             <button class="comments">Comments (<span class="commentNumber">{{comments.length}})</span></button>
 
         </div>
 
-        <div class="model">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Write a comment here</p>
-                <form action="/profiles/{{owner}}" method="post">
-                    <input type="hidden" name="imageId" class="imageidtest" value="{{this.id}}">
-                    <textarea rows="6" cols="50" name="comment" class="messageComment" maxlength="30"></textarea>
-                    <br>
-                    <!--<span class="counterText">You have <input disabled maxlength="30" size="2" value="30" class="counter"> charachters to write.</span> -->
-                    <span class="feedback"></span>
-                    <input type="submit" value="Post comment" class="postComment">
 
-                </form>
-            </div>
-        </div>
 
 
         <div class="modelComments">

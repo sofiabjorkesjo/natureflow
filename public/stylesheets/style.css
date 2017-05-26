@@ -18,6 +18,15 @@ body{
     text-align: center;
 }
 
+h2 {
+    font-family: Helvetica;
+}
+
+.errorText {
+    font-family: Helvetica;
+    font-weight: 100;
+}
+
 #header {
     width: auto;
     background-color: rgba(226, 226, 226, 0.22);
@@ -226,6 +235,7 @@ a {
     height: 50px;
     font-weight: 100;
     font-size: 20px;
+    margin-top: 10px;
 }
 
 .profileNoImages {

@@ -15,7 +15,7 @@
 {{#if images}}
     {{#each images}}
         <div class="images">
-            <p id="publishedBy">Published by <span class="user">{{owner}}</span></p>
+            <p id="publishedBy">Published by <span class="user"><a href="/profiles/{{owner}}"> {{owner}}</a></span></p>
             <div class="imageDiv">
                 <a href='/images/{{ this.path }}' data-lightbox="image1"> <img src='/images/{{ this.path }}'></a>
             </div>

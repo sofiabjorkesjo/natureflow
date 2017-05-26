@@ -105,7 +105,11 @@ router.route('/profile')
                          for (let j = 0; j < comments.length; j++) {
                              if (images[i]._id == comments[j].imageId) {
                                  //console.log("comment!");
-                                 images2[i].comments.push(comments[j]);
+                                 let comment = {};
+                                 comment.text = comments[j].text;
+                                 comment.owner = comments[j].owner;
+                                 comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
+                                 images2[i].comments.push(comment);
                              }
                          }
                      }
@@ -135,7 +139,7 @@ router.route('/profile')
 
 router.route('/profiles/:user')
     .get(function (req, res) {
-        if (req.session.user) {
+
             User.findOne({username: req.params.user}, function (error, data) {
                 if (data) {
                     Image.find({ownerId: data._id}, function (error, images) {
@@ -160,7 +164,11 @@ router.route('/profiles/:user')
                                 for (let j = 0; j < comments.length; j++) {
                                     if (images[i]._id == comments[j].imageId) {
                                         //console.log("comment!");
-                                        images2[i].comments.push(comments[j]);
+                                        let comment = {};
+                                        comment.text = comments[j].text;
+                                        comment.owner = comments[j].owner;
+                                        comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
+                                        images2[i].comments.push(comment);
                                     }
                                 }
                             }
@@ -176,9 +184,6 @@ router.route('/profiles/:user')
                 }
             });
 
-        } else {
-            res.redirect('/403');
-        }
     });
 
 router.route('/search')
