@@ -6,26 +6,19 @@ let exphbs = require('express-handlebars');
 //kan spara ner data
 let session = require('express-session');
 let mongoose = require('./config/db');
-//req.body
 let bodyParser = require('body-parser');
 //kan använda sökvägar
 let path = require('path');
-let helpers = require('handlebars-helpers');
 let fileUpload = require('express-fileupload');
 let http = require('http');
 
 
 let app = express();
 app.use(fileUpload());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//app.use(bodyParser({uploadDir: './images'}));
-
 let port = process.env.PORT || 3000;
-
-
 
 //connectar till mongoose
 mongoose();
@@ -63,14 +56,6 @@ app.use(function (req, res, next) {
 });
 
 
-
-
-// exphbs.helpers()
-// Handlebars.helpers('splitDate', function (date) {
-//     let d = date.split('GMT+0200');
-//     return d;
-//
-// });
 //startar
 let server = http.createServer(app).listen(port, function () {
     console.log('Express started on http://localhost' + port);
@@ -82,10 +67,6 @@ app.use('/', require('./routes/socketRoutes')(io));
 //public mappen
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-//ansluter och avslutar anslutningen till sockets.
-//requirar socket
 
 //404 error handeling
 app.use(function (req, res, next) {
@@ -100,6 +81,8 @@ app.use(function (err, req, res, next) {
     res.status(500).render('error/500');
 
 });
+
+//ansluter och avslutar anslutningen till sockets.
 
 io.on('connection', function (socket) {
     console.log("tesstttt");

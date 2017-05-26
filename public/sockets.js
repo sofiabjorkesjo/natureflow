@@ -8,7 +8,6 @@ let socket = io();
 //hämtar bilderna i realtid
 
 socket.on('image', function (image) {
-    console.log(image);
     let path = image.path;
     let wrapper = document.querySelector('#wrapper');
     let imageDiv = document.createElement('div');
@@ -27,8 +26,6 @@ socket.on('image', function (image) {
     a.appendChild(link);
     imageDiv2.appendChild(a);
     imageDiv.appendChild(imageDiv2);
-
-
     let addComment = document.createElement('button');
     addComment.setAttribute('class', 'addComment');
     addComment.textContent = 'Add comment';
@@ -92,33 +89,8 @@ socket.on('image', function (image) {
     model.appendChild(modelcontent);
     wrapper.insertBefore(model, wrapper.childNodes[3]);
 
+    //klickar upp och klickar ner boxen för att posta en kommentar på sidan när bilder uppdaterats i realtid
 
-
-    //klicka upp
-
-    //let newImages = addComment.length;
-    //console.log(newImages);
-    let test = document.querySelectorAll('.addComment');
-    console.log(test.length);
-
-    // let allAddComments = document.querySelectorAll('.addComment');
-    // let allModels = document.querySelectorAll('.model');
-    // let allClose = document.querySelectorAll('.close');
-    //FIXA DETTA
-
-    //add comment
-    //
-    // for (let i = 0; i < allAddComments.length; i++) {
-    //     allAddComments[i].addEventListener('click', function () {
-    //         console.log('hejhejhej');
-    //         console.log(model);
-    //         console.log(model.length);
-    //         allModels[i].style.display = 'block';
-    //     });
-    //     allClose[i].addEventListener('click', function () {
-    //         allModels[i].style.display = 'none';
-    //     });
-    // }
     addComment.addEventListener('click', function () {
         model.style.display = 'block';
     });
@@ -133,31 +105,17 @@ socket.on('image', function (image) {
         }
     });
 
-
-    // window.addEventListener('click', function () {
-    //     for (let j = 0; j < allAddComments.length; j++) {
-    //         if (event.target === allModels[j]) {
-    //             allModels[j].style.display = 'none';
-    //         }
-    //     }
-    //
-    // });
-
-
-
-    //räknar
-
+    //räknar hur många tecken man har kvar att skriva på kommentaren på sidan när bilder uppdaterats i realtid
 
     textArea.addEventListener('keyup', function () {
-        console.log('ejjejejje');
         if(textArea.value.length > 30) {
             return false;
         }
-        feedback.textContent = 'You have ' + (30-textArea.value.length) + ' charachters to write';
+        feedback.textContent = 'You have ' + (30-textArea.value.length) + ' characters to write';
     });
 
 
-    //visar kommentarerna
+    //visar kommentarerna på sidan när bilder uppdaterats i realtid
 
     let modelComments = document.createElement('div');
     modelComments.setAttribute('class', 'modelComments');
@@ -175,30 +133,10 @@ socket.on('image', function (image) {
     h2.textContent = 'Comments';
     CommentsText.appendChild(h2);
     modelCommentsContent.appendChild(CommentsText);
-    // let commentsDiv = document.createElement('div');
-    // commentsDiv.setAttribute('class', 'commentsDiv');
-    // let pText = document.createElement('p');
-    // pText.setAttribute('class', 'testt');
-    // let owner = document.createElement('span');
-    // owner.setAttribute('class', 'ownerComment');
-    // owner.textContent = comments.owner;
-    // pText.appendChild(owner);
-    // pText.textContent = comments.text;
-    // commentsDiv.appendChild(pText);
-    // let date = document.createElement('p');
-    // date.setAttribute('class', 'date');
-    // date.textContent = comments.date;
-    // commentsDiv.appendChild(date);
-    // modelCommentsContent.appendChild(commentsDiv);
     modelComments.appendChild(modelCommentsContent);
     wrapper.insertBefore(modelComments, wrapper.childNodes[3]);
 
-
-    //comments read
-    // let allCommentsButton = document.querySelectorAll('.comments');
-    // let allModelComments = document.querySelectorAll('.modelComments');
-    // let allSpanCLose = document.querySelectorAll('.closeComments');
-
+    //klickar upp och klickar ner boxen med kommentarerna på sidan när bilder uppdaterats i realtid
 
     comments.addEventListener('click', function () {
         modelComments.style.display = 'block';
@@ -213,51 +151,29 @@ socket.on('image', function (image) {
             modelComments.style.display = 'none';
         }
     });
-//
-//     for (let i = 0; i < allCommentsButton.length; i++) {
-//         allCommentsButton[i].addEventListener('click', function () {
-//             allModelComments[i].style.display = 'block';
-//         });
-//         allSpanCLose[i].addEventListener('click', function () {
-//             allModelComments[i].style.display = 'none';
-//         });
-//     }
-//     for (let i = 0; i < allCommentsButton.length; i++) {
-//         window.addEventListener('click', function () {
-//             if (event.target === allModelComments[i]) {
-//                 allModelComments[i].style.display = 'none';
-//             }
-//         })
-//     }
  });
 
 
 //skapar en ny kommentar med socket så att det uppdateras i realtid
-socket.on('comment', function (comment) {
 
+socket.on('comment', function (comment) {
 
     let commentsContent = document.querySelectorAll('.modelComments-content');
     let images = document.querySelectorAll('.images');
-    console.log('sjjsjsaaaaaaa');
-    console.log(images);
 
     //loopar igenom alla comments-content divar och väljer den som har samma id som kommentaren.
     //Då skapas en ny kommentar till den commments-content.
-
 
     for (let i = 0; i < commentsContent.length; i++) {
         console.log(commentsContent.length);
         if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
             let commentDiv = document.createElement("div");
             commentDiv.setAttribute("class", "commentsDiv");
-
             let p = document.createElement("p");
             p.setAttribute("class", 'testt');
-
             let span = document.createElement('span');
             span.setAttribute('class', 'ownerComment');
             span.textContent = comment.owner;
-
             p.appendChild(span);
             let text = document.createTextNode(' ' + '"' + comment.text + '"');
             p.appendChild(text);
@@ -269,35 +185,19 @@ socket.on('comment', function (comment) {
 
             comment.date = new Date(comment.date);
             let dateText = document.createTextNode('Published ' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString());
-
             date.appendChild(dateText);
             commentDiv.appendChild(date);
             commentsContent[i].appendChild(commentDiv);
-
-            //numret med antal bilder uppdateras
-            // console.log(images);
-            // console.log(images[i]);
-            // let commentNumber = images[i].querySelector('.commentsNumber');
-            // commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
-            // console.log('testtest');
-            // console.log(commentNumber);
         }
     }
-    console.log(images.length);
-    // med denna sätter den 1 på den längst ner på sidan som ej uppdaterats o ej den rätta bilden.
-    //måste hitta o koppla rätt id.
+
+    //räknar hur många kommentarer bilderna har
+
     for (let i = 0; i < images.length; i++){
-        //med den sätter den 1 på alla
-       // for (let j = 0; j < commentsContent.length; j++) {
         if (commentsContent[i].getAttribute("data-id") === comment.imageId) {
-        //console.log(images[i]);
         let commentNumber = images[i].querySelector('.commentsNumber');
         commentNumber.textContent = parseInt(commentNumber.textContent) +  1;
-
-        //console.log('testtest');
-        //console.log(commentNumber);
         }
-        //}
     }
 });
 

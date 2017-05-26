@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * Schema för bilderna
+ */
+
 let mongoose = require('mongoose');
 
 let imageSchema = new mongoose.Schema({

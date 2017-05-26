@@ -3,12 +3,16 @@
 let mongoose = require('mongoose');
 let bcrypt = require('bcrypt-nodejs');
 
-//ett schema för en användare
+/**
+ * Schema för användare
+ */
 
 let userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     password: {type: String, required: true}
 });
+
+//användarnamnet måste vara minst 4 tecken & lösenordet minst 6 tecken
 
 userSchema.path('username').validate(function (username) {
     return username.length >= 4;
@@ -17,6 +21,8 @@ userSchema.path('username').validate(function (username) {
 userSchema.path('password').validate(function (password) {
     return password.length >= 6;
 }, 'The password must be of minimum length 6 characters');
+
+//hashar och saltar llösenordet
 
 userSchema.pre('save', function (next) {
     let user = this;

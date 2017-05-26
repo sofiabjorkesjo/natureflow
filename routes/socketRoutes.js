@@ -8,11 +8,17 @@ module.exports = function (io) {
     let Comment = require('../models/Comment');
     let bcrypt = require('bcrypt-nodejs');
 
+    /**
+     * hämtar mina routes för de sidor som använder sockets
+     */
 
     //hämtar startsidan
 
     router.route('/')
         .get(function (req, res) {
+
+            //hittar alla användare
+
             User.find({}, function (error, data) {
                 let context = {
                     users: data.map(function (data) {
@@ -22,6 +28,9 @@ module.exports = function (io) {
                         };
                     })
                 };
+
+                //hittar alla bilder som finns uppladdade på databasen
+
                 Image.find({}, function (error, images) {
                     if (error) return console.log("error");
                     let allImages = {
@@ -30,10 +39,11 @@ module.exports = function (io) {
                                 path: images.path,
                                 owner: images.owner,
                                 date: images.date,
-                                //imageId: images.imageId
                             };
                         })
                     };
+
+                    //skickar bilderna med sockets till klienten med sockets till bildspelet
                     //funkade ej utan timeout
                     setTimeout(function() {
                         io.emit('images', allImages);
@@ -44,6 +54,7 @@ module.exports = function (io) {
         })
 
         // kollar om användaren finns registrerad
+
         .post(function (req, res) {
             let checkUser = User.find({'username': req.body.username});
             checkUser.exec().then(function (data) {
@@ -67,25 +78,24 @@ module.exports = function (io) {
                             message:'Wrong username or password.'
                         };
                         console.log(err);
-                        console.log('error error');
                         res.redirect('/');
                     }
                 })
         });
 
 
-    //hittar och visar alla bilder
+    //hämtar sidan med alla bilder.
 
     router.route('/images')
         .get(function getImages (req, res) {
             if (req.session.user) {
-                // Image.find({owner: req.session.user.username}, function (error, data) {
                 Image.find({}, function Test (error, images) {
-                    // console.log(images);
                     if (error) return console.log("error");
                     images.sort(function (a, b) {
                         return b.date - a.date;
                     });
+
+                    //hittar alla kommentarer som hör till bilderna.
 
                     Comment.find({}, function(error, comments) {
                         let images2 = [];
@@ -94,25 +104,18 @@ module.exports = function (io) {
                             images2[i].path = images[i].path;
                             images2[i].owner = images[i].owner;
                             images2[i].date = images[i].date;
-
                             images2[i].id = images[i]._id;
-
                             images2[i].comments = [];
-                            // Add comments
-                            // console.log(comments);
                             for (let j = 0; j < comments.length; j++) {
                                 if (images[i]._id == comments[j].imageId) {
-                                    // console.log("comment!");
                                     let comment = {};
                                     comment.text = comments[j].text;
                                     comment.owner = comments[j].owner;
-                                    //comment.date = new Date(comments[j].date).toLocaleString();
                                     comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
                                     images2[i].comments.push(comment);
                                 }
                             }
                         }
-
                         res.render('basic/images', {images: images2});
                     });
                 })
@@ -122,7 +125,6 @@ module.exports = function (io) {
         })
 
         //postar kommentarer till bilderna.
-
 
         .post(function (req, res) {
             if (req.session.user) {
@@ -135,15 +137,14 @@ module.exports = function (io) {
                     date: Date.now(),
                     imageId: req.body.imageId
                 });
-                console.log(comment);
+
+                //sparar kommentarerna och skickar dom till klienten med sockets
 
                 comment.save()
                     .then(function () {
                         io.emit("comment", comment);
-
                         res.redirect('/images');
                     })
-
 
                     .catch(function (err) {
                         if (err) {
@@ -156,10 +157,11 @@ module.exports = function (io) {
                             res.redirect('/images');
                         }
                         res.redirect('/images');
-
                     })
             }
         });
+
+    //hämtar sidan för att ladda upp bilder
 
     router.route('/upload')
         .get(function (req, res) {
@@ -175,18 +177,14 @@ module.exports = function (io) {
         .post(function (req, res) {
             if (req.session.user) {
                 let image = req.files.imgFile;
-                // console.log('tetststsia');
-                // console.log(req.files.imgFile);
-                //console.log(req.files.imgFile.mimetype);
-
                 if (image) {
-                    if (req.files.imgFile.mimetype == 'image/jpeg'||req.files.imgFile.mimetype == 'image/png' ) {
 
+                    //filtypen måste vara jpeg eller png
+
+                    if (req.files.imgFile.mimetype == 'image/jpeg'||req.files.imgFile.mimetype == 'image/png' ) {
                         let imageName = req.session.user.username + '_' + (Math.random() * 1000000000) + '_' + req.files.imgFile.name;
                         image.mv('public/images/' + imageName, function (error) {
                             if (error) {
-
-                                console.log('error här');
                                 return console.log(error);
                             }
                             let image = new Image({
@@ -197,49 +195,38 @@ module.exports = function (io) {
                                 ownerId: req.session.user._id
                             });
 
-
+                            //skickar dom till klienten med sockets.
 
                             image.save(function (error) {
-                                if (error) return console.log("error :(");
+                                if (error) return console.log(error);
                                 io.emit('image', image);
                                 res.redirect('/images');
                             });
-
-
                         })
-
-
 
                     } else {
                         //flash om de är nått annat än jpeg bild
+
                         req.session.flash = {
                             type: 'fail',
                             message: 'Photo must be type image/jpeg'
                         };
-                        console.log('must be jog ');
                         res.redirect('/upload');
                     }
 
                 } else {
-                    //flash om man försöker ladda upp en bild utan att ha valt en
+                    //flash om man försöker ladda upp en bild utan att ha valt en bild
 
                     req.session.flash = {
                         type: 'fail',
                         message: 'You must select a photo to upload.'
                     };
-                    console.log('feeel');
                     res.redirect('/upload');
                 }
-
-
-
-
             } else {
                 res.redirect('/403');
             }
         });
-
-
 
     return router;
 

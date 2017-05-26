@@ -8,11 +8,11 @@ let http = require('http');
 let fs = require('fs');
 let Comment = require('../models/Comment');
 
-//hämtar startsidan & hittar alla användare som finns registrerade
+/**
+ * Gör mina routes för de sidor där jag inte använder sockets.
+ */
 
-
-//hämtar sidan för att sign up
-//skapar en ny user, kollar om den finns, annars sparar den.
+//hämtar sidan för att registrera sig
 
 router.route('/sign-up')
     .get(function (req, res) {
@@ -23,7 +23,6 @@ router.route('/sign-up')
             username: req.body.username,
             password: req.body.password
         });
-
 
         //hittar en användare
 
@@ -56,14 +55,13 @@ router.route('/sign-up')
                             console.log(err);
                            req.session.flash = {
                                type: 'fail',
-                               message: err.message + '. The password must be of minimum lenghh six charachters, and the username four charachters.'
+                               message: err.message + '. The password must be of minimum lenghh six characters, and the username four characters.'
                            };
                         }
                         res.redirect('/sign-up');
                     });
             }
         });
-
     });
 
 //hämar sidan för att ha loggad ut o sätter användaren till undefind
@@ -75,19 +73,22 @@ router.route('/logged-out')
         res.render('basic/logged-out');
     });
 
-//hämtar sidan för att ladda upp en bild
-
-
-
+//hämtar sidan för den som är inloggads profil
 
 router.route('/profile')
     .get(function (req, res) {
         if(req.session.user) {
+
+            //hittar de bilder vars ägare är samma som den som är inloggads användarnamn
+
              Image.find({owner: req.session.user.username}, function (error, images) {
                 if (error) return console.log('error');
                  images.sort(function (a, b) {
                      return b.date - a.date;
                  });
+
+                 //hittar kommentarerna som är till bilderna
+
                  Comment.find({}, function(error, comments) {
                      let images2 = [];
                      for (let i = 0; i < images.length; i++) {
@@ -96,15 +97,10 @@ router.route('/profile')
                          images2[i].owner = images[i].owner;
                          images2[i].date = images[i].date;
                          images2[i].ownerId = images[i].ownerId;
-
                          images2[i].id = images[i]._id;
-
                          images2[i].comments = [];
-                         // Add comments
-                         // console.log(comments);
                          for (let j = 0; j < comments.length; j++) {
                              if (images[i]._id == comments[j].imageId) {
-                                 //console.log("comment!");
                                  let comment = {};
                                  comment.text = comments[j].text;
                                  comment.owner = comments[j].owner;
@@ -123,13 +119,13 @@ router.route('/profile')
 
     .post(function (req, res) {
         if (req.session.user) {
+
+            //hittar och tar bort en bild
+
             Image.findOneAndRemove({_id: req.body.inputDelete}, function (err) {
-               // console.log(req.params.imageId);
-                console.log('tjo');
                 if (err) {
                     console.log(err);
                 }
-
                 res.redirect('/profile');
             })
         } else {
@@ -137,11 +133,18 @@ router.route('/profile')
         }
     });
 
+//hämtar sidan för den användare som man sökt efter på söksidan eller den som är länkad på bilderna
+
 router.route('/profiles/:user')
     .get(function (req, res) {
 
+            //hittar den som har samma användarnamn som det som skrivs in i sökrutan på search-sidan
+
             User.findOne({username: req.params.user}, function (error, data) {
                 if (data) {
+
+                    //hittar de bilder som har samma ownerId som användarens id, och de kommentarer som hör till bilderna
+
                     Image.find({ownerId: data._id}, function (error, images) {
                         if (error) return console.log('error');
                         images.sort(function (a, b) {
@@ -155,12 +158,8 @@ router.route('/profiles/:user')
                                 images2[i].owner = images[i].owner;
                                 images2[i].date = images[i].date;
                                 images2[i].ownerId = images[i].ownerId;
-
                                 images2[i].id = images[i]._id;
-
                                 images2[i].comments = [];
-                                // Add comments
-                                // console.log(comments);
                                 for (let j = 0; j < comments.length; j++) {
                                     if (images[i]._id == comments[j].imageId) {
                                         //console.log("comment!");
@@ -183,21 +182,22 @@ router.route('/profiles/:user')
                     res.redirect('/search');
                 }
             });
-
     });
+
+//hämtar sidan för att söka efter användare och sökord till bilderna.
 
 router.route('/search')
     .get(function (req, res) {
         if (req.session.user) {
-            console.log('test user searchl');
             let test = req.session.user;
-            console.log(test);
             res.render('basic/search');
         } else {
             res.redirect('/403');
         }
-
     })
+
+    //postar och redirectar till sidan för en användare eller sökord
+
     .post(function(req, res) {
         let word = req.body.searchWord;
         let user = req.body.searchUser;
@@ -212,15 +212,17 @@ router.route('/search')
                 message: 'You must write a word in the box'
             };
             res.redirect('/search');
-
         }
     });
+
+//hämtar sidan för de sökord som man har sökt på söksidan
 
 router.route('/search/:word')
     .get(function (req, res) {
         if (req.session.user) {
-            console.log(req.session.user);
-            console.log(req.params.word);
+
+            //hittar de bilder som har samma sökord som det som skrivits in i sökrutan
+
             Image.find({hashtags: req.params.word}, function (error, images) {
                 if (error) return console.log("error");
                 images.sort(function (a, b) {
@@ -234,24 +236,20 @@ router.route('/search/:word')
                         images2[i].path = images[i].path;
                         images2[i].owner = images[i].owner;
                         images2[i].date = images[i].date;
-
                         images2[i].id = images[i]._id;
-
                         images2[i].comments = [];
-                        // Add comments
-                        // console.log(comments);
                         for (let j = 0; j < comments.length; j++) {
                             if (images[i]._id == comments[j].imageId) {
-                                // console.log("comment!");
                                 let comment = {};
                                 comment.text = comments[j].text;
                                 comment.owner = comments[j].owner;
-                                //comment.date = new Date(comments[j].date).toLocaleString();
                                 comment.date = new Date(comments[j].date).toLocaleDateString() + " " + new Date(comments[j].date).toLocaleTimeString();
                                 images2[i].comments.push(comment);
                             }
                         }
                     }
+
+                    //om det inte finns någon bild som matchar sökordet så får man flashmeddelande
 
                     if (images2.length === 0){
                         req.session.flash = {
@@ -268,12 +266,11 @@ router.route('/search/:word')
         }
     });
 
+//Hämtar sidan för 403 fel
 
 router.route('/403')
     .get(function (req, res) {
         res.render('error/403');
     });
-
-
 
 module.exports = router;

@@ -1,18 +1,8 @@
 let chai = require('chai');
-let expect = require('chai').expect;
-//let file = require('../routes/home');
 let app = require('../app');
-
 let assert = require('assert');
 let http = require('http');
 
-// describe('get Images', function () {
-//     it('should get all the images', function () {
-//         chai.request(app)
-//             .get('/images')
-//             .end((err, res))
-//     })
-// })
 
 describe('HTTP server test', function () {
 

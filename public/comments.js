@@ -1,15 +1,17 @@
 'use strict';
 
 
+/**
+ * Klickar upp och klickar ner boxen för att skriva en kommentar och för att läsa kommentarerna
+ */
+
 let modell = document.getElementsByClassName('model');
 let btn = document.querySelectorAll('.addComment');
-//console.log(btn.length);
 let span = document.getElementsByClassName('close');
-
-
-
 let nrOfImages = btn.length;
 
+//går igenom alla bildernas knappar addComment och visar boxen för att kommentera om man klickar på den aktuella knappen.
+//om man klickar på krysser så visas inte boxen.
 
 for (let i = 0; i < nrOfImages; i++) {
     btn[i].addEventListener('click', function () {
@@ -22,6 +24,8 @@ for (let i = 0; i < nrOfImages; i++) {
     });
 }
 
+//när man klickar på fönstret utanför boxen så stängs boxen ner
+
 window.addEventListener('click', function () {
     for (let j = 0; j < nrOfImages; j++) {
         if (event.target === modell[j]) {
@@ -31,7 +35,7 @@ window.addEventListener('click', function () {
 
 });
 
-//Klickar upp boxen för att skriva kommentar, och klicka ner boxen
+//Klickar upp boxen för att läsa kommentar, och klicka ner boxen
 
 let modellComments = document.getElementsByClassName('modelComments');
 let button = document.querySelectorAll('.comments');
@@ -47,6 +51,8 @@ for (let i = 0; i < button.length; i ++) {
 
     });
 }
+
+//när man klickar på fönstret utanför boxen så stängs boxen ner
 
 window.addEventListener('click', function () {
     for (let i = 0; i < button.length; i++) {
@@ -74,7 +80,10 @@ for(let i = 0; i < nrOfImages; i++) {
     }
 }
 
-//sätter kommentarsfältet till tomt och nedräkningen återställs
+/**
+ *
+ * @constructor - sätter kommentarsfältet till tomt och nedräkningen återställs
+ */
 
 function Clear() {
     for(let i = 0; i < nrOfImages; i++) {
