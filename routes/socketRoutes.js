@@ -128,9 +128,6 @@ module.exports = function (io) {
 
         .post(function (req, res) {
             if (req.session.user) {
-                io.emit('hej', 'hej');
-                console.log('test comment');
-                console.log(req.body.imageId);
                 let comment = new Comment({
                     text: req.body.comment,
                     owner: req.session.user.username,
@@ -149,7 +146,6 @@ module.exports = function (io) {
                     .catch(function (err) {
                         if (err) {
                             console.log(err);
-                            console.log('error comments');
                             req.session.flash = {
                                 type: 'fail',
                                 message: ' The comment must be max 30 characters and minumum 1 charachters'

@@ -36,7 +36,6 @@ router.route('/sign-up')
             } else {
                 userObject.save()
                     .then(function () {
-                        console.log(User);
                         let checkUser = User.find({'username': req.body.username});
                         checkUser.exec().then(function (data) {
                             bcrypt.compare(req.body.password, data[0].password, function (error, result) {
@@ -51,7 +50,6 @@ router.route('/sign-up')
                     })
                     .catch(function (err) {
                         if (err) {
-                            console.log('error rrr rr rr r ');
                             console.log(err);
                            req.session.flash = {
                                type: 'fail',
@@ -162,7 +160,6 @@ router.route('/profiles/:user')
                                 images2[i].comments = [];
                                 for (let j = 0; j < comments.length; j++) {
                                     if (images[i]._id == comments[j].imageId) {
-                                        //console.log("comment!");
                                         let comment = {};
                                         comment.text = comments[j].text;
                                         comment.owner = comments[j].owner;

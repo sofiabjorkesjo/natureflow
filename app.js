@@ -85,7 +85,6 @@ app.use(function (err, req, res, next) {
 //ansluter och avslutar anslutningen till sockets.
 
 io.on('connection', function (socket) {
-    console.log("tesstttt");
     socket.emit('message', 'You are connected to sockets');
     socket.on('disconnected', function () {
         console.log('disconnected socket');
