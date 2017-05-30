@@ -14,8 +14,17 @@ socket.on('image', function (image) {
     imageDiv.setAttribute('class', 'images');
     let p = document.createElement('p');
     p.setAttribute('id', 'publishedBy');
-    p.textContent = 'Published by' + image.owner;
+    let spanUser = document.createElement('span');
+    spanUser.setAttribute('class', 'user');
+    let userLink = document.createElement('a');
+    userLink.setAttribute('href', '/profiles/' + image.owner);
+    let textUser = document.createTextNode(image.owner);
+    userLink.appendChild(textUser);
+    spanUser.appendChild(userLink);
+    p.textContent = 'Published by ';
+    p.appendChild(spanUser)
     imageDiv.appendChild(p);
+
     let imageDiv2 = document.createElement('div');
     imageDiv2.setAttribute('class', 'imageDiv');
     let link = document.createElement('img');
