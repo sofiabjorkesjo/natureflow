@@ -18,7 +18,7 @@ app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 
 //connectar till mongoose
 mongoose();
