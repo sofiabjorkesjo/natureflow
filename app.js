@@ -61,8 +61,8 @@ let server = http.createServer(app).listen(port, function () {
     console.log('Express started on http://localhost' + port);
 });
 let io = require('socket.io')(server);
-app.use('/', require('./routes/home'));
-app.use('/', require('./routes/socketRoutes')(io));
+app.use('/natureflow', require('./routes/home'));
+app.use('/natureflow', require('./routes/socketRoutes')(io));
 
 //public mappen
 app.use(express.static(path.join(__dirname, 'public')));
