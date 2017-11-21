@@ -65,7 +65,7 @@ app.use('/natureflow', require('./routes/home'));
 app.use('/natureflow', require('./routes/socketRoutes')(io));
 
 //public mappen
-app.use('/public', express.static(path.join(__dirname, '/natureflow/public')));
+app.use(express.static(path.join(__dirname, '/natureflow/public')));
 
 
 //404 error handeling
