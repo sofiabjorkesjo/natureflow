@@ -65,7 +65,7 @@ app.use('/', require('./routes/home'));
 app.use('/', require('./routes/socketRoutes')(io));
 
 //public mappen
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //404 error handeling
